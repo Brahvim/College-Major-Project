@@ -1,15 +1,20 @@
 import os
 import threading
+import concurrent.futures
+
 import filetype
 from flask import *
 
-locks_chunks = {}
-lock_upload = threading.Lock()
-
-chunks = {}
-uploading = []
-speed_dl_bps = 8192
-app = Flask(__name__)
+# region Module-fields.
+_chunks = {}
+_dl_bps = 8192
+_metadata = {}
+_uploading = []
+_chunk_locks = {}
+_app = Flask(__name__)
+_lock_uploading = threading.Lock()
+_executor = concurrent.futures.ThreadPoolExecutor()
+# endregion
 
 try:
     os.mkdir("./files")
@@ -17,37 +22,44 @@ except FileExistsError:
     pass
 
 
-@app.route("/")
+@_app.route("/")
 def index():  # Pass `q` as a parameter here :D (e.g. `q: int`!)
     q = request.args.get("q")
     return f"You passed the number `{q}`!"
 
 
-@app.route("/ul/<string:name>", methods=["POST"])
-def ul(name: str):
+@_app.route("/ul/<string:p_name>", methods=["POST"])
+def ul(p_name: str):
     content = request.get_json()
-    chunk_count = content["chunkCount"]
+    chunk_id = content["chunkId"]
 
-    return make_response("", 200)
+    if chunk_id == -1:
+        _metadata[p_name]["chunkCount"] = content["chunkCount"]
+        _uploading.append(p_name)
+    else:
+        if _uploading.__contain__(p_name):
+            pass
+
+    return make_response(200)
 
 
-@app.route("/dl/<string:name>")
-def dl(name: str):
+@_app.route("/dl/<string:p_name>")
+def dl(p_name: str):
     for anomaly in []:
-        if name.__contains__(anomaly):
+        if p_name.__contain__(anomaly):
             return make_response(
-                f"Sorry, the file path {name} contains a reference to a parent directory in the form of a `{anomaly}`.")
+                f"Sorry, the file path {p_name} contains a reference to a parent directory in the form of a `{anomaly}`.")
 
     def file_yielder():
-        with open(f"./files/{name}") as file:
-            yield file.read(speed_dl_bps)
+        with open(f"./files/{p_name}") as file:
+            yield file.read(_dl_bps)
 
     ret = Response(file_yielder(), mimetype="")
-    ret.headers["Content-Disposition"] = f"attachment; filename={name}"
+    ret.headers["Content-Disposition"] = f"attachment; filename={p_name}"
     return ret
 
 
 # filetype.guess() # Use to guess file-types. You will get an enum back.
 if __name__ == "__main__":
-    app.run()
+    _app.run()
     # print("Please use `flask --app app run` instead.")
