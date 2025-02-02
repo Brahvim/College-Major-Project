@@ -28,17 +28,22 @@ def index():  # Pass `q` as a parameter here :D (e.g. `q: int`!)
     return f"You passed the number `{q}`!"
 
 
-@_app.route("/ul/<string:p_name>", methods=["POST"])
+@_app.route("/ul/<string:p_name>", methods=["PUT"])
 def ul(p_name: str):
     content = request.get_json()
     chunk_id = content["chunkId"]
 
     if chunk_id == -1:
         _metadata[p_name]["chunkCount"] = content["chunkCount"]
-        _uploading.append(p_name)
+
+        if _uploading.__contains__(p_name):
+            return make_response("Sorry, that file already exists!", 409)
+        else:
+            _uploading.append(p_name)
     else:
-        if _uploading.__contain__(p_name):
-            pass
+        if _uploading.__contains__(p_name):
+            payload = content["payload"]
+            _chunks[p_name].append(payload)
 
     return make_response(200)
 
@@ -46,7 +51,7 @@ def ul(p_name: str):
 @_app.route("/dl/<string:p_name>")
 def dl(p_name: str):
     for anomaly in []:
-        if p_name.__contain__(anomaly):
+        if p_name.__contains__(anomaly):
             return make_response(
                 f"Sorry, the file path {p_name} contains a reference to a parent directory in the form of a `{anomaly}`.")
 
