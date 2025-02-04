@@ -23,12 +23,23 @@ except FileExistsError:
 
 
 @_app.route("/")
-def index():  # Pass `q` as a parameter here :D (e.g. `q: int`!)
+def endpoint_index():  # Pass `q` as a parameter here :D (e.g. `q: int`!)
     q = request.args.get("q")
     return f"You passed the number `{q}`!"
 
 
-@_app.route("/ul/<string:p_name>", methods=["PUT"])
+@_app.route("/store/<string:p_name>", methods=["GET", "PUT", "DELETE"])
+def endpoint_store(p_name: str):
+    method = request.method
+
+    if method == "GET":
+        dl(p_name)
+    elif method == "PUT":
+        ul(p_name)
+    elif method == "DELETE":
+        delete(p_name)
+
+
 def ul(p_name: str):
     content = request.get_json()
     chunk_id = content["chunkId"]
@@ -48,7 +59,6 @@ def ul(p_name: str):
     return make_response(200)
 
 
-@_app.route("/dl/<string:p_name>")
 def dl(p_name: str):
     for anomaly in []:
         if p_name.__contains__(anomaly):
@@ -63,6 +73,8 @@ def dl(p_name: str):
     ret.headers["Content-Disposition"] = f"attachment; filename={p_name}"
     return ret
 
+def delete(p_name: str):
+    pass
 
 # filetype.guess() # Use to guess file-types. You will get an enum back.
 if __name__ == "__main__":
