@@ -1,0 +1,8 @@
+/* All CSS inside this block will be used to override all other CSS when printing. */
+@media print {
+
+	.noPrint {
+		display: none !important;
+	}
+
+}

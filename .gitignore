@@ -1,9 +1,1 @@
-# Directories:
-__pycache__
-files
-.venv
-build
-dist
-
-# Files:
-app.spec
+.directory

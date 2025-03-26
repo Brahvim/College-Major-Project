@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0"
+	>
+	<link
+		rel="stylesheet"
+		href="index.css"
+	>
+	<!-- The following CSS file will be used ONLY when printing. -->
+	<!-- You can choose to ignore making a separate file w/ and `@media print { }` block, though. -->
+	<!-- <link
+		media="print"
+		rel="stylesheet"
+		href="print-only.css"
+	> -->
+	<title>Resumé</title>
+</head>
+
+<body>
+	Hi, my name is <span id="name"></span>!
+	I am <span id="age"></span> years old.
+	<br>
+	<button
+		class="noPrint"
+		onclick="window.print()"
+	>Print page</button>
+	<!-- Scripts MUST be loaded last! -->
+	<script src="index.js"></script>
+</body>
+
+</html>
