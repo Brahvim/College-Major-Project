@@ -1,0 +1,20 @@
+{
+	"bugs": {
+		"url": "https://github.com/Brahvim/College-Major-Project/issues"
+	},
+	"type": "module",
+	"license": "ISC",
+	"description": "",
+	"version": "1.0.0",
+	"main": "server.mjs",
+	"author": "Brahvim, UdHax0r",
+	"name": "college-major-project",
+	"homepage": "https://github.com/Brahvim/College-Major-Project#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Brahvim/College-Major-Project.git"
+	},
+	"dependencies": {
+		"express": "^4.21.2"
+	}
+}
