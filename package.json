@@ -1,0 +1,12 @@
+{
+	"author": "@Brahvim, @UdHax0r",
+	"name": "resume-builder",
+	"main": "server.js",
+	"version": "1.0.0",
+	"description": "",
+	"license": "ISC",
+	"type": "module",
+	"dependencies": {
+		"express": "^5.1.0"
+	}
+}
