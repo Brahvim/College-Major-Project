@@ -1,0 +1,131 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fb;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Resume Container */
+  .resume {
+    max-width: 800px;
+    margin: 30px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+  
+  /* Boxed Header */
+  .boxed-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .boxed-header h1 {
+    font-size: 36px;
+    margin: 0;
+    color: #2d2d2d;
+  }
+  
+  .boxed-header p {
+    font-size: 18px;
+    color: #5f6368;
+    margin-top: 5px;
+  }
+  
+  /* Boxed Section */
+  .boxed-section {
+    margin-bottom: 30px;
+  }
+  
+  .boxed-section h2 {
+    font-size: 24px;
+    color: #4a4a4a;
+    border-bottom: 2px solid #e2e2e2;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* Work Experience */
+  .job {
+    margin-bottom: 15px;
+  }
+  
+  .job h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+  }
+  
+  .job span {
+    font-size: 14px;
+    color: #7b7b7b;
+    margin-left: 10px;
+  }
+  
+  .job ul {
+    margin-top: 5px;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .job ul li {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #5f6368;
+  }
+  
+  /* Boxed Grid */
+  .boxed-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px;
+  }
+  
+  .boxed-grid div {
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .boxed-grid h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .boxed-grid ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .boxed-grid ul li {
+    font-size: 16px;
+    color: #5f6368;
+  }
+  
+  .boxed-grid p {
+    font-size: 16px;
+    color: #5f6368;
+  }
+  
+  .boxed-grid p strong {
+    color: #333;
+  }
+  
+  /* Media Queries for Responsive Design */
+  @media (max-width: 768px) {
+    .boxed-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .boxed-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  

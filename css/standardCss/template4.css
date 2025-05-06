@@ -1,0 +1,60 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ececec;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .resume {
+    max-width: 1000px;
+    margin: 40px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+  }
+  
+  .card-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .card-header h1 {
+    font-size: 36px;
+    color: #2c3e50;
+  }
+  
+  .card-header p {
+    font-size: 18px;
+    color: #7f8c8d;
+  }
+  
+  .card-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .card {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h2 {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .card ul {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  
+  .card ul li {
+    font-size: 16px;
+    color: #7f8c8d;
+  }
+  
