@@ -1,4 +1,3 @@
-import "express";
 import express from "express";
 
 const s_port = 8080;
