@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>@meenasharma | Résumé</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      padding: 2rem;
+    }
+
+    .resume {
+      max-width: 840px;
+      margin: auto;
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(1, 1, 1, 0.5);
+    }
+
+    .username {
+      font-size: 1.6rem;
+      color: #58a6ff;
+      margin-bottom: 0.2rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #8b949e;
+      margin-bottom: 1.6rem;
+    }
+
+    .section {
+      margin-bottom: 1.6rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      color: #79c0ff;
+      border-bottom: 1px solid #30363d;
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .list {
+      list-style-type: none;
+      padding-left: 1rem;
+    }
+
+    .list li::before {
+      content: "# ";
+      color: #3fb950;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6e7681;
+      margin-top: 2rem;
+      border-top: 1px solid #21262d;
+      padding-top: 1rem;
+    }
+
+    .graph {
+      display: grid;
+      grid-template-columns: repeat(31, 1fr);
+      grid-gap: 2px;
+      margin-top: 1rem;
+    }
+
+    .block {
+      width: 10px;
+      height: 10px;
+      background-color: #161b22;
+    }
+
+    .block.level-1 { background-color: #0e4429; }
+    .block.level-2 { background-color: #006d32; }
+    .block.level-3 { background-color: #26a641; }
+    .block.level-4 { background-color: #39d353; }
+  </style>
+</head>
+<body>
+  <div class="resume">
+    <div class="username">@meenasharma</div>
+    <div class="tagline">retired educator · contributor to young minds · coffee-powered · still learning...</div>
+
+    <div class="section">
+      <div class="section-title">🧾 About</div>
+      <p>
+        Committed to education since the floppy disk era.  
+        Specialised in Literature, curriculum design, and good tea.  
+        Now reading 📚... and mentoring the next-gen from the shadows.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">💼 Experience</div>
+      <ul class="list">
+        <li>Senior Lecturer – St. Teresa's (1990–2021)</li>
+        <li>Curriculum Consultant – Regional Board</li>
+        <li>Writer – “Teaching Chronicles” Weekly Column</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📚 Education</div>
+      <ul class="list">
+        <li>M.A. in English Literature – Delhi University</li>
+        <li>B.Ed. – IGNOU</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🧠 Skills</div>
+      <ul class="list">
+        <li>Curriculum Writing</li>
+        <li>Public Speaking</li>
+        <li>Poetry Analysis</li>
+        <li>Gentle Sarcasm™</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📊 Contributions (to humanity)</div>
+      <div class="graph">
+        <!-- Just a random pattern for visuals -->
+        <div class="block"></div>
+        <div class="block level-1"></div>
+        <div class="block level-2"></div>
+        <div class="block level-3"></div>
+        <div class="block level-4"></div>
+        <div class="block level-1"></div>
+        <div class="block level-2"></div>
+        <div class="block level-3"></div>
+        <div class="block"></div>
+        <div class="block level-1"></div>
+        <div class="block level-4"></div>
+        <div class="block level-3"></div>
+        <div class="block level-2"></div>
+        <div class="block level-1"></div>
+        <div class="block"></div>
+        <div class="block level-1"></div>
+        <div class="block level-2"></div>
+        <div class="block level-3"></div>
+        <div class="block level-4"></div>
+        <div class="block level-3"></div>
+        <div class="block level-2"></div>
+        <div class="block level-1"></div>
+        <div class="block"></div>
+        <div class="block level-1"></div>
+        <div class="block level-2"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block level-3"></div>
+        <div class="block level-1"></div>
+        <div class="block level-4"></div>
+      </div>
+    </div>
+
+    <div class="footer">
+      last updated on: <code>$(date)</code> · this resumé is open-source 💅  
+    </div>
+  </div>
+</body>
+</html>
