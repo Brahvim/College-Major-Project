@@ -1,0 +1,45 @@
+<html lang="en">
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1.0"
+>
+<title>Résum󠃩é</title>
+
+<body>
+	<script>
+		const params = new URLSearchParams(new URL(window.location.href).search);
+		const layout = params.get("l");
+		const theme = params.get("t");
+
+		document.body.innerHTML += `<link rel="stylesheet" href="${`/theme/${theme}.css`}">`;
+
+		fetch(`/layout/${layout}.html`).then((p_response) => {
+
+			p_response.text().then((p_html) => {
+
+				document.body.innerHTML += p_html;
+				main();
+
+			});
+
+		});
+
+		fetch(`/js/${layout}.js`).then((p_response) => {
+
+			p_response.text().then((p_js) => {
+
+				const script = document.createElement("script");
+				script.textContent = p_js;
+				document.body.appendChild(script);
+
+			});
+
+		});
+	</script>
+
+</body>
+
+</html>

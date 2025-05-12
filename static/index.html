@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="UTF-8" />
+<meta
+	name="viewport"
+	content="width=device-width, initial-scale=1.0"
+/>
+<title>Choose Layout & Theme</title>
+
+<style>
+	body {
+		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		background: #f4f6fa;
+		color: #333;
+		margin: 0;
+	}
+
+	.go-button-div {
+		scale: 1;
+		color: #e7efff;
+		margin-left: 50%;
+		cursor: pointer;
+		width: fit-content;
+		border-radius: 5px;
+		background-color: #94b8e4;
+	}
+
+	.go-button-div:hover {
+		scale: 1.6 1.5;
+		transition: scale 0.1s ease-in-out;
+	}
+
+	.go-button {}
+
+	.choice-screen {
+		gap: 2rem;
+		display: flex;
+		padding: 2rem;
+		height: fit-content;
+		box-sizing: border-box;
+	}
+
+	.column {
+		flex: 1;
+		background: white;
+		height: fit-content;
+		border-radius: 20px;
+		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	h2 {
+		font-weight: 600;
+		margin-bottom: 1.5rem;
+	}
+
+	.button-grid {
+		display: grid;
+		gap: 1rem;
+	}
+
+	/* Shared button styles */
+	.layout-btn,
+	.theme-btn {
+		all: unset;
+		background: #e7efff;
+		border-radius: 16px;
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		cursor: pointer;
+		transition: background 0.2s ease;
+	}
+
+	.layout-btn:hover,
+	.theme-btn:hover {
+		background: #d0e4ff;
+	}
+
+	.layout-btn.selected,
+	.theme-btn.selected {
+		outline: 3px solid #5599ff;
+		outline-offset: 3px;
+		background: #dceeff;
+		box-shadow: 0 0 0 3px rgba(85, 153, 255, 0.3);
+		transform: scale(1.02);
+		transition: all 0.15s ease;
+	}
+
+	.layout-skeleton {
+		width: 100%;
+		height: 80px;
+		background: #cbd9ec;
+		border-radius: 12px;
+		margin-bottom: 0.5rem;
+		position: relative;
+		overflow: hidden;
+	}
+
+	/* Top-Bottom layout (Notebook lines) */
+	.top-bottom {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		padding: 0.5rem;
+		gap: 0.3rem;
+		background: none;
+	}
+
+	.top-bottom div {
+		height: 6px;
+		border-radius: 4px;
+		background: #aac4e4;
+		margin-left: 5%;
+		width: 90%;
+		opacity: 0.8;
+	}
+
+	/* 20%-30%-50% layout */
+	.layout-203050-fixed {
+		display: flex;
+		flex-direction: column;
+		height: 80px;
+		/* Ensure height is defined */
+		width: 100%;
+		gap: 4px;
+		padding: 4px;
+		box-sizing: border-box;
+		background: none;
+	}
+
+	.layout-203050-fixed .row {
+		margin-left: 5%;
+		display: flex;
+		width: 90%;
+		gap: 4px;
+	}
+
+	.layout-203050-fixed .top-row {
+		height: 40%;
+	}
+
+	.layout-203050-fixed .bottom-row {
+		height: 60%;
+	}
+
+	.slice {
+		background: #aac4e4;
+		border-radius: 6px;
+		height: 100%;
+	}
+
+	.slice-20 {
+		width: 30%;
+		height: 100%;
+		background: #aac4e4;
+	}
+
+	.slice-30 {
+		width: 70%;
+		background: #94b8e4;
+	}
+
+	.slice-50 {
+		width: 100%;
+		background: #7ca8e2;
+	}
+
+	/* Tiles layout (Grid!) */
+	.tiles {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(3, 1fr);
+		gap: 4px;
+		width: 90%;
+		padding: 4px;
+		background: none;
+	}
+
+	.tiles div {
+		border-radius: 6px;
+		background: linear-gradient(145deg, #aac4e4, #94b8e4);
+		opacity: 0.9;
+	}
+
+	/* Card + Sections layout */
+	.card-sections {
+		width: 90%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.card-sections .top {
+		height: 30%;
+		background: #aac4e4;
+		border-radius: 12px 12px 0 0;
+	}
+
+	.card-sections .bottom {
+		height: 70%;
+		background: #94b8e4;
+		border-radius: 0 0 12px 12px;
+	}
+</style>
+
+<body>
+	<script>
+		let g_choiceTheme = "";
+		let g_choiceLayout = "";
+
+		document.addEventListener("DOMContentLoaded", () => {
+
+			document.querySelector(".go-button").addEventListener("click", () => {
+
+				if (!(g_choiceTheme && g_choiceLayout)) {
+
+					return;
+
+				}
+
+				window.location.href = `/resume.html?l=${g_choiceLayout}&&t=${g_choiceTheme}`;
+
+			});
+
+			document.querySelectorAll(".layout-btn").forEach(p_button => {
+
+				p_button.addEventListener("click", () => {
+
+					document.querySelectorAll(".layout-btn").forEach(b => b.classList.remove("selected"));
+					g_choiceLayout = p_button.getAttribute("data-layout");
+					p_button.classList.add("selected");
+
+				});
+
+			});
+
+			document.querySelectorAll(".theme-btn").forEach(p_button => {
+
+				p_button.addEventListener("click", () => {
+
+					document.querySelectorAll(".theme-btn").forEach(b => b.classList.remove("selected"));
+					g_choiceTheme = p_button.getAttribute("data-layout");
+					p_button.classList.add("selected");
+
+				});
+
+			});
+
+		});
+	</script>
+
+	<main class="choice-screen">
+		<!-- Layouts -->
+		<section class="column layout-column">
+			<h2>Select Layout</h2>
+			<div class="button-grid">
+				<button
+					class="layout-btn"
+					data-layout="top-bottom"
+				>
+					<div class="layout-skeleton top-bottom">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+					<span>Top-Bottom</span>
+				</button>
+
+				<button
+					class="layout-btn"
+					data-layout="203050"
+				>
+					<div class="layout-skeleton layout-203050-fixed">
+						<div class="row top-row">
+							<div class="slice slice-20"></div>
+							<div class="slice slice-30"></div>
+						</div>
+						<div class="row bottom-row">
+							<div class="slice slice-50"></div>
+						</div>
+					</div>
+					<span>20%-30%-50%</span>
+				</button>
+
+				<button
+					class="layout-btn"
+					data-layout="tiles"
+				>
+					<div class="layout-skeleton tiles">
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+						<div></div>
+					</div>
+					<span>Tiles</span>
+				</button>
+
+				<button
+					class="layout-btn"
+					data-layout="card-sections"
+				>
+					<div class="layout-skeleton card-sections">
+						<div class="top"></div>
+						<div class="bottom"></div>
+					</div>
+					<span>Card + Sections</span>
+				</button>
+			</div>
+		</section>
+
+		<!-- Themes -->
+		<section class="column theme-column">
+			<h2>Select Theme</h2>
+			<div class="button-grid">
+				<button
+					data-layout="light-blue"
+					class="theme-btn light-blue"
+				>Light Blue</button>
+				<button
+					data-layout="soft-neutral"
+					class="theme-btn soft-neutral"
+				>Soft Neutral</button>
+				<!-- Add more themes later -->
+			</div>
+		</section>
+	</main>
+	<div class="go-button-div">
+		<h2 class="go-button">&nbsp;GO!&nbsp;</h2>
+	</div>
+</body>
+
+</html>
