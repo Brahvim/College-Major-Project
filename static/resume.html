@@ -1,52 +1,53 @@
 <html lang="en">
-
 <!DOCTYPE html>
-<meta charset="UTF-8">
-<meta
-	name="viewport"
-	content="width=device-width, initial-scale=1.0"
->
-<title>Résum󠃩é</title>
 
-<body>
-	<script>
-		document.addEventListener("DOMContentLoaded", () => {
+<head>
+	<meta charset="UTF-8">
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0"
+	>
+	<title>Résum󠃩é</title>
+</head>
 
-			const params = new URLSearchParams(new URL(window.location.href).search);
-			const resume = document.getElementById("resume");
-			const layout = params.get("l");
-			const theme = params.get("t");
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
 
-			document.body.innerHTML += `<link rel="stylesheet" href="${`/theme/${theme}.css`}">`;
+		const params = new URLSearchParams(new URL(window.location.href).search);
+		const resume = document.getElementById("resume");
+		const layout = params.get("l");
+		const theme = params.get("t");
 
-			fetch(`/layout/${layout}.html`).then((p_response) => {
+		document.body.innerHTML += `<link rel="stylesheet" href="${`/theme/${theme}.css`}">`;
 
-				p_response.text().then((p_html) => {
+		fetch(`/layout/${layout}.html`).then((p_response) => {
 
-					document.body.insertAdjacentHTML("beforebegin", p_html);
+			p_response.text().then((p_html) => {
 
-				});
+				document.body.insertAdjacentHTML("beforebegin", p_html);
 
-			});
+				// Fetch JS ONLY when HTML exists:
+				fetch(`/js/${layout}.js`).then((p_response) => {
 
-			fetch(`/js/${layout}.js`).then((p_response) => {
+					p_response.text().then((p_js) => {
 
-				p_response.text().then((p_js) => {
+						document.body.appendChild(document.createElement("script")).textContent = p_js;
 
-					document.body.appendChild(document.createElement("script")).textContent = p_js;
+					});
 
 				});
 
 			});
 
 		});
-	</script>
 
+	});
+</script>
+
+<body>
 	<div id="section-manager-container">
-		<p>
-			<button id="add-section-btn">Add Section</button>
-			<button id="print-btn">Print</button>
-		</p>
+		<button id="add-section-btn">Add Section</button>
+		<button id="print-btn">Print</button>
 	</div>
 </body>
 
@@ -60,9 +61,14 @@
 	}
 
 	#section-manager-container {
+		columns: 2;
 		display: flex;
-		justify-content: center;
 		margin-top: 2rem;
+		justify-content: center;
+	}
+
+	#section-manager-container button {
+		margin-left: 2px;
 	}
 
 	#add-section-btn {

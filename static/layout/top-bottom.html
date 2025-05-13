@@ -6,14 +6,23 @@
 		<h2><textarea class="user-editable-h2"># About Me</textarea></h2>
 		<p><textarea class="user-editable-p">Hi there! My name is. I am a professional</textarea></p>
 	</div>
-
-	<div class="section">
-		<h2><textarea class="user-editable-h2"># Heading 2</textarea></h2>
-		<p><textarea class="user-editable-p">Maybe your work experience?</textarea></p>
-	</div>
 </div>
 
+<template id="section">
+	<div style="columns: 2;">
+		<h2><textarea class="user-editable-h2"># New Section</textarea></h2>
+		<button class="remove-section-btn">x</button>
+	</div>
+	<p><textarea class="user-editable-p"></textarea></p>
+</template>
+
 <style>
+	@media print {
+		.remove-section-btn {
+			display: none;
+		}
+	}
+
 	.layout-top-bottom {
 		display: flex;
 		flex-direction: column;
