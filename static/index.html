@@ -207,54 +207,54 @@
 	}
 </style>
 
-<body>
-	<script>
-		let g_choiceTheme = "";
-		let g_choiceLayout = "";
+<script>
+	let g_choiceTheme = "";
+	let g_choiceLayout = "";
 
-		document.addEventListener("DOMContentLoaded", () => {
+	document.addEventListener("DOMContentLoaded", () => {
 
-			document.querySelector(".go-button").addEventListener("click", () => {
+		document.querySelector(".go-button").addEventListener("click", () => {
 
-				if (!(g_choiceTheme && g_choiceLayout)) {
+			if (!(g_choiceTheme && g_choiceLayout)) {
 
-					return;
+				return;
 
-				}
+			}
 
-				window.location.href = `/resume.html?l=${g_choiceLayout}&&t=${g_choiceTheme}`;
+			window.location.href = `/resume.html?l=${g_choiceLayout}&&t=${g_choiceTheme}`;
 
-			});
+		});
 
-			document.querySelectorAll(".layout-btn").forEach(p_button => {
+		document.querySelectorAll(".layout-btn").forEach(p_button => {
 
-				p_button.addEventListener("click", () => {
+			p_button.addEventListener("click", () => {
 
-					document.querySelectorAll(".layout-btn").forEach(b => b.classList.remove("selected"));
-					g_choiceLayout = p_button.getAttribute("data-layout");
-					p_button.classList.add("selected");
-
-				});
-
-			});
-
-			document.querySelectorAll(".theme-btn").forEach(p_button => {
-
-				p_button.addEventListener("click", () => {
-
-					document.querySelectorAll(".theme-btn").forEach(b => b.classList.remove("selected"));
-					g_choiceTheme = p_button.getAttribute("data-layout");
-					p_button.classList.add("selected");
-
-				});
+				document.querySelectorAll(".layout-btn").forEach(b => b.classList.remove("selected"));
+				g_choiceLayout = p_button.getAttribute("data-layout");
+				p_button.classList.add("selected");
 
 			});
 
 		});
-	</script>
 
+		document.querySelectorAll(".theme-btn").forEach(p_button => {
+
+			p_button.addEventListener("click", () => {
+
+				document.querySelectorAll(".theme-btn").forEach(b => b.classList.remove("selected"));
+				g_choiceTheme = p_button.getAttribute("data-layout");
+				p_button.classList.add("selected");
+
+			});
+
+		});
+
+	});
+</script>
+
+<body>
 	<main class="choice-screen">
-		<!-- Layouts -->
+		<!-- Layouts: -->
 		<section class="column layout-column">
 			<h2>Select Layout</h2>
 			<div class="button-grid">
@@ -322,19 +322,39 @@
 			</div>
 		</section>
 
-		<!-- Themes -->
+		<!-- Themes: -->
 		<section class="column theme-column">
 			<h2>Select Theme</h2>
 			<div class="button-grid">
 				<button
-					data-layout="light-blue"
-					class="theme-btn light-blue"
-				>Light Blue</button>
+					data-layout="corporate-blue"
+					class="theme-btn corporate-blue"
+				>Corporate Blue</button>
 				<button
-					data-layout="soft-neutral"
-					class="theme-btn soft-neutral"
-				>Soft Neutral</button>
-				<!-- Add more themes later -->
+					data-layout="frutiger-aero"
+					class="theme-btn frutiger-aero"
+				>Frutiger Aero</button>
+				<button
+					data-layout="wise-rose"
+					class="theme-btn wise-rose"
+				>Wise Rose</button>
+				<button
+					data-layout="neon-lights"
+					class="theme-btn neon-lights"
+				>Neon Lights</button>
+				<button
+					data-layout="cybersec-black"
+					class="theme-btn cybersec-black"
+				>Cybersec Black</button>
+				<button
+					data-layout="kernel-org"
+					class="theme-btn kernel-org"
+				>Kernel.org Theme</button>
+				<button
+					data-layout="github-dark"
+					class="theme-btn github-dark"
+				>GitHub Dark</button>
+
 			</div>
 		</section>
 	</main>

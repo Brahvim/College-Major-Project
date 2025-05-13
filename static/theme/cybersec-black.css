@@ -1,0 +1,75 @@
+body {
+	font-family: 'Fira Code', monospace;
+	background-color: #0b0f10;
+	color: #54d3c9;
+	margin: 0;
+	padding: 2rem;
+	font-size: 16px;
+}
+
+#resume {
+	max-width: 860px;
+	margin: auto;
+	background: #0e1214;
+	border: 1px solid #1f2a2e;
+	border-radius: 10px;
+	padding: 2rem;
+	box-shadow: 0 0 16px rgba(84, 211, 201, 0.08);
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.section {
+	padding: 1.25rem 1.5rem;
+	background: #0c1113;
+	border: 1px solid #1b2528;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(84, 211, 201, 0.08);
+}
+
+.user-editable-h2,
+.user-editable-p {
+	width: 100%;
+	resize: none;
+	border: none;
+	background: transparent;
+	font: inherit;
+	color: #54d3c9;
+	padding: 0.4rem;
+	box-sizing: border-box;
+	transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.user-editable-h2:focus,
+.user-editable-p:focus {
+	background: rgba(84, 211, 201, 0.05);
+	outline: none;
+	border-bottom: 1px solid #54d3c9;
+}
+
+h2 {
+	margin: 0 0 0.5rem 0;
+	font-size: 1.5rem;
+	color: #54d3c9;
+}
+
+p {
+	margin: 0;
+	color: #54d3c9;
+}
+
+.remove-section-btn {
+	border: none;
+	color: black;
+	cursor: pointer;
+	font-weight: bold;
+	border-radius: 8px;
+	background-color: #54d3c9 !important;
+	padding: 0.25rem 0.75rem;
+	transition: background-color 0.2s ease;
+}
+
+.remove-section-btn:hover {
+	background-color: pink !important;
+}

@@ -1,0 +1,83 @@
+body {
+	font-family: 'Georgia', serif;
+	background: linear-gradient(to bottom, #fdf6f9, #f5e7ec);
+	color: #3b1f2b;
+	margin: 0;
+	padding: 2rem;
+	font-size: 16px;
+}
+
+#resume {
+	max-width: 880px;
+	margin: auto;
+	background: #fff8fb;
+	border: 2px solid #d6a4b1;
+	border-radius: 16px;
+	padding: 2.5rem;
+	box-shadow: 0 0 20px rgba(164, 108, 121, 0.2);
+	display: flex;
+	flex-direction: column;
+	gap: 2.2rem;
+}
+
+.section {
+	padding: 1.75rem;
+	background: linear-gradient(to bottom, #fdf3f7, #fff);
+	border: 1px solid #dab3c0;
+	border-radius: 10px;
+	box-shadow: inset 0 0 10px rgba(170, 120, 135, 0.1);
+	transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.section:hover {
+	box-shadow: 0 0 12px rgba(150, 70, 90, 0.15);
+	background: #fef6f9;
+}
+
+.user-editable-h2,
+.user-editable-p {
+	width: 100%;
+	resize: none;
+	border: none;
+	background: transparent;
+	font: inherit;
+	color: inherit;
+	padding: 0.3rem;
+	box-sizing: border-box;
+	border-bottom: 1px dotted #a07384;
+	transition: background 0.2s ease;
+}
+
+.user-editable-h2:focus,
+.user-editable-p:focus {
+	background: rgba(255, 245, 250, 0.6);
+	outline: 2px dashed #c9879c;
+}
+
+h2 {
+	margin: 0 0 0.5rem 0;
+	font-size: 1.6rem;
+	color: #5d2b40;
+	text-shadow: 0 1px 0 #fff0f5;
+}
+
+p {
+	margin: 0;
+	color: #3b1f2b;
+}
+
+.remove-section-btn {
+	color: grey;
+	border: none;
+	border-radius: 8px;
+	padding: 0.25rem 0.75rem;
+	cursor: pointer;
+	font-weight: bold;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	background: grey;
+}
+
+.remove-section-btn:hover {
+	color: white;
+	background: white;
+}

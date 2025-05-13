@@ -1,0 +1,86 @@
+body {
+	font-family: 'Orbitron', 'Courier New', monospace;
+	background: linear-gradient(90deg, #0f0c29, #24243e);
+	color: #00f6ff;
+	margin: 0;
+	padding: 2rem;
+	font-size: 16px;
+}
+
+#resume {
+	max-width: 880px;
+	margin: auto;
+	background: rgba(0, 0, 0, 0.45);
+	border: 2px solid #0ff;
+	border-radius: 16px;
+	padding: 2.5rem;
+	box-shadow: 0 0 25px #0ff, 0 0 40px #f0f, 0 0 8px #0ff inset;
+	display: flex;
+	flex-direction: column;
+	gap: 2.2rem;
+	backdrop-filter: blur(6px);
+}
+
+.section {
+	padding: 1.75rem;
+	background: linear-gradient(135deg, rgba(20, 20, 40, 0.8), rgba(0, 0, 0, 0.6));
+	border: 1px solid #f0f;
+	border-radius: 12px;
+	box-shadow: 0 0 20px #ff00ff88;
+	transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.section:hover {
+	box-shadow: 0 0 30px #00ffffaa, 0 0 20px #ff00ffaa;
+	background: rgba(10, 10, 30, 0.9);
+}
+
+.user-editable-h2,
+.user-editable-p {
+	width: 100%;
+	resize: none;
+	border: none;
+	font: inherit;
+	color: #00f6ff;
+	padding: 0.3rem;
+	box-sizing: border-box;
+	background: transparent;
+	transition: background 0.2s ease, border 0.3s ease;
+}
+
+.user-editable-h2:focus,
+.user-editable-p:focus {
+	outline: none;
+	border-bottom: 2px solid #00ffff;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+h2 {
+	color: #ff00ff;
+	font-size: 1.75rem;
+	margin: 0 0 0.5rem 0;
+	/* text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff0088; */
+}
+
+p {
+	margin: 0;
+	color: #f0f;
+}
+
+.remove-section-btn {
+	color: #ff0088;
+	border: none;
+	border-radius: 8px;
+	padding: 0.25rem 0.75rem;
+	cursor: pointer;
+	font-weight: bold;
+	box-shadow: 0 0 8px #ff0088;
+	background: #440033;
+	transition: background 0.2s ease, color 0.2s ease, box-shadow 0.3s ease;
+}
+
+.remove-section-btn:hover {
+	color: #0ff;
+	background: #000000;
+	box-shadow: 0 0 15px #00ffff;
+}

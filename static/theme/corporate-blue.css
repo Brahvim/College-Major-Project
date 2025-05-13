@@ -1,0 +1,78 @@
+body {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f9fbfd;
+	color: #222;
+	margin: 0;
+	padding: 2rem;
+	line-height: 1.6;
+	font-size: 15px;
+}
+
+#resume {
+	max-width: 900px;
+	margin: 0 auto;
+	background: white;
+	padding: 2rem;
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 64, 128, 0.1);
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.section {
+	padding: 1.5rem;
+	border-left: 4px solid #3a75c4;
+	border-radius: 8px;
+	background: #f0f6ff;
+	transition: background 0.2s ease;
+}
+
+.section:hover {
+	background: #e8f1ff;
+}
+
+.user-editable-h2,
+.user-editable-p {
+	width: 100%;
+	resize: none;
+	border: none;
+	background: transparent;
+	font: inherit;
+	color: inherit;
+	padding: 0.25rem;
+	box-sizing: border-box;
+}
+
+.user-editable-h2:focus,
+.user-editable-p:focus {
+	outline: 2px dashed #3a75c4;
+	background-color: #eef6ff;
+}
+
+h2 {
+	margin: 0 0 0.5rem 0;
+	font-size: 1.4rem;
+	color: #174b99;
+}
+
+p {
+	margin: 0;
+	font-family: monospace;
+}
+
+.remove-section-btn {
+	background: #e03030;
+	color: grey;
+	border: none;
+	border-radius: 6px;
+	padding: 0.25rem 0.5rem;
+	cursor: pointer;
+	float: right;
+	font-weight: bold;
+}
+
+.remove-section-btn:hover {
+	background: #b02020;
+	color: white;
+}

@@ -11,8 +11,8 @@ g_btnPrint.addEventListener("click", () => {
 	grabHeadings().forEach(p_textArea => {
 
 		const heading = document.createElement("h2");
-		heading.innerHTML = p_textArea.value;
 		heading.className = "user-editable-h2";
+		heading.innerHTML = p_textArea.value;
 		p_textArea.replaceWith(heading);
 
 	});
@@ -20,8 +20,8 @@ g_btnPrint.addEventListener("click", () => {
 	grabParagraphs().forEach(p_textArea => {
 
 		const paragraph = document.createElement("p");
-		paragraph.innerHTML = p_textArea.value;
 		paragraph.className = "user-editable-p";
+		paragraph.innerHTML = p_textArea.value;
 		p_textArea.replaceWith(paragraph);
 
 	});
@@ -31,8 +31,8 @@ g_btnPrint.addEventListener("click", () => {
 	grabHeadings().forEach(p_heading => {
 
 		const textArea = document.createElement("textarea");
-		textArea.value = p_heading.innerHTML;
 		textArea.className = "user-editable-h2";
+		textArea.value = p_heading.innerHTML;
 		p_heading.replaceWith(textArea);
 
 	});
@@ -40,8 +40,8 @@ g_btnPrint.addEventListener("click", () => {
 	grabParagraphs().forEach(p_paragraph => {
 
 		const textArea = document.createElement("textarea");
-		textArea.value = p_paragraph.innerHTML;
 		textArea.className = "user-editable-p";
+		textArea.value = p_paragraph.innerHTML;
 		p_paragraph.replaceWith(textArea);
 
 	});
@@ -62,5 +62,3 @@ g_btnSectAdd.addEventListener("click", () => {
 	newSection.querySelector(".remove-section-btn").addEventListener("click", () => resume.removeChild(newSection));
 
 });
-
-g_btnSectAdd.click();
