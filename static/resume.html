@@ -10,36 +10,96 @@
 
 <body>
 	<script>
-		const params = new URLSearchParams(new URL(window.location.href).search);
-		const layout = params.get("l");
-		const theme = params.get("t");
+		document.addEventListener("DOMContentLoaded", () => {
 
-		document.body.innerHTML += `<link rel="stylesheet" href="${`/theme/${theme}.css`}">`;
+			const params = new URLSearchParams(new URL(window.location.href).search);
+			const resume = document.getElementById("resume");
+			const layout = params.get("l");
+			const theme = params.get("t");
 
-		fetch(`/layout/${layout}.html`).then((p_response) => {
+			document.body.innerHTML += `<link rel="stylesheet" href="${`/theme/${theme}.css`}">`;
 
-			p_response.text().then((p_html) => {
+			fetch(`/layout/${layout}.html`).then((p_response) => {
 
-				document.body.innerHTML += p_html;
-				main();
+				p_response.text().then((p_html) => {
+
+					document.body.insertAdjacentHTML("beforebegin", p_html);
+
+				});
 
 			});
 
-		});
+			fetch(`/js/${layout}.js`).then((p_response) => {
 
-		fetch(`/js/${layout}.js`).then((p_response) => {
+				p_response.text().then((p_js) => {
 
-			p_response.text().then((p_js) => {
+					document.body.appendChild(document.createElement("script")).textContent = p_js;
 
-				const script = document.createElement("script");
-				script.textContent = p_js;
-				document.body.appendChild(script);
+				});
 
 			});
 
 		});
 	</script>
 
+	<div id="section-manager-container">
+		<p>
+			<button id="add-section-btn">Add Section</button>
+			<button id="print-btn">Print</button>
+		</p>
+	</div>
 </body>
+
+<style>
+	@media print {
+
+		#section-manager-container {
+			display: none !important;
+		}
+
+	}
+
+	#section-manager-container {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+	}
+
+	#add-section-btn {
+		padding: 0.5rem 1rem;
+		font-size: 1rem;
+		border: none;
+		border-radius: 6px;
+		background: #5599ff;
+		color: white;
+		cursor: pointer;
+		transition: background 0.2s ease;
+	}
+
+	#print-btn {
+		padding: 0.5rem 1rem;
+		font-size: 1rem;
+		border: none;
+		border-radius: 6px;
+		background: #5599ff;
+		color: white;
+		cursor: pointer;
+		transition: background 0.2s ease;
+	}
+
+	.remove-section-btn {
+		margin-left: 90%;
+		margin-right: 5%;
+		border-radius: 16px;
+	}
+
+	#print-btn:hover {
+		background: #407ddf;
+	}
+
+	#add-section-btn:hover {
+		background: #407ddf;
+	}
+</style>
 
 </html>

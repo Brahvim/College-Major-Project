@@ -3,20 +3,13 @@
 	class="layout-top-bottom"
 >
 	<div class="section">
-		<h2 contenteditable="true"># About Me</h2>
-		<p contenteditable="true">Hello there! My name is </p>
+		<h2><textarea class="user-editable-h2"># About Me</textarea></h2>
+		<p><textarea class="user-editable-p">Hi there! My name is. I am a professional</textarea></p>
 	</div>
 
 	<div class="section">
-		<h2 contenteditable="true"># Heading 2</h2>
-		<p contenteditable="true">Maybe your work experience?</p>
-	</div>
-
-	<div id="section-manager-container">
-		<p>
-			<button id="add-section-btn">[+] Add Section</button>
-			<button id="preview-btn">[P] Preview</button>
-		</p>
+		<h2><textarea class="user-editable-h2"># Heading 2</textarea></h2>
+		<p><textarea class="user-editable-p">Maybe your work experience?</textarea></p>
 	</div>
 </div>
 
@@ -46,7 +39,7 @@
 		border: 1px dashed #bbb;
 	}
 
-	.section h2 {
+	.user-editable-h2 {
 		cursor: text;
 		color: #333;
 		width: 300pt;
@@ -54,51 +47,9 @@
 		font-size: 1.25rem;
 	}
 
-	.section p {
+	.user-editable-p {
 		margin: 0;
 		cursor: text;
 		white-space: pre-wrap;
-	}
-
-	#section-manager-container {
-		display: flex;
-		justify-content: center;
-		margin-top: 2rem;
-	}
-
-	#add-section-btn {
-		padding: 0.5rem 1rem;
-		font-size: 1rem;
-		border: none;
-		border-radius: 6px;
-		background: #5599ff;
-		color: white;
-		cursor: pointer;
-		transition: background 0.2s ease;
-	}
-
-	#preview-btn {
-		padding: 0.5rem 1rem;
-		font-size: 1rem;
-		border: none;
-		border-radius: 6px;
-		background: #5599ff;
-		color: white;
-		cursor: pointer;
-		transition: background 0.2s ease;
-	}
-
-	.remove-section-btn {
-		margin-left: 90%;
-		margin-right: 5%;
-		border-radius: 16px;
-	}
-
-	#preview-btn:hover {
-		background: #407ddf;
-	}
-
-	#add-section-btn:hover {
-		background: #407ddf;
 	}
 </style>
