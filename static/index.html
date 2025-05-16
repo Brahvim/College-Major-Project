@@ -12,7 +12,7 @@
 	body {
 		margin: 0;
 		color: #333;
-		height: fit-content;
+		height: 100vh;
 		background: #f4f6fa;
 		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	}
@@ -195,43 +195,9 @@
 		background: #94b8e4;
 		border-radius: 0 0 12px 12px;
 	}
-
-	.go-button:hover {
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-		scale: 1.5;
-	}
-
-	.go-button {
-		scale: 1;
-		top: 2.5vh;
-		left: 50vw;
-
-		width: 150px;
-
-		font-size: 25px;
-		cursor: pointer;
-		color: #e7efff;
-		text-align: center;
-
-		position: relative;
-		border-radius: 5px;
-		height: fit-content;
-
-		display: inline-block;
-		text-decoration: none;
-		background-color: #94b8e4;
-
-		translate: -50% -50%;
-		transition: scale 0.2s ease, box-shadow 0.2s ease;
-	}
 </style>
 
 <body>
-	<br>
-	<a
-		href=""
-		class="go-button"
-	>&nbsp;GO!&nbsp;</a>
 	<main class="choice-screen">
 		<!-- Layouts: -->
 		<section class="column layout-column">
@@ -408,15 +374,23 @@
 
 	document.addEventListener("DOMContentLoaded", () => {
 
-		const anchorGo = document.querySelector(".go-button");
 		const btnArrayTheme = [...document.querySelectorAll(".theme-btn")];
 		const btnArrayLayout = [...document.querySelectorAll(".layout-btn")];
 		const createUrl = () => `/resume.html?l=${g_choiceLayout}&&t=${g_choiceTheme}`;
-		const cbckAssignUrl = () => anchorGo.href = (g_choiceTheme && g_choiceLayout) ? createUrl() : "";
+		const cbckAssignUrl = () => window.location.href = (g_choiceTheme && g_choiceLayout) ? createUrl() : "";
 
-		anchorGo.addEventListener("click", (p_event) => window.location.href = createUrl());
-		try { document.querySelector(`.theme-btn.${g_choiceTheme}`).classList.add("selected"); } catch { };
-		try { document.querySelector(`.layout-btn.layout-btn-${g_choiceLayout}`).classList.add("selected"); } catch { };
+		switch (sessionStorage.getItem("last")) {
+
+			case "theme":
+				try { document.querySelector(`.theme-btn.${g_choiceTheme}`).classList.add("selected"); } catch { };
+				break;
+
+
+			case "layout":
+				try { document.querySelector(`.layout-btn.layout-btn-${g_choiceLayout}`).classList.add("selected"); } catch { };
+				break;
+
+		}
 
 		btnArrayLayout.forEach(p_button => {
 
@@ -424,7 +398,10 @@
 
 				btnArrayLayout.forEach(b => b.classList.remove("selected"));
 				g_choiceLayout = p_button.getAttribute("data-layout");
+
 				sessionStorage.setItem("layout", g_choiceLayout);
+				sessionStorage.setItem("last", "layout");
+
 				p_button.classList.add("selected");
 				cbckAssignUrl();
 
@@ -438,7 +415,10 @@
 
 				btnArrayTheme.forEach(b => b.classList.remove("selected"));
 				g_choiceTheme = p_button.getAttribute("data-layout");
+
 				sessionStorage.setItem("theme", g_choiceTheme);
+				sessionStorage.setItem("last", "theme");
+
 				p_button.classList.add("selected");
 				cbckAssignUrl();
 
