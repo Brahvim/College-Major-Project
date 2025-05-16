@@ -10,28 +10,12 @@
 
 <style>
 	body {
-		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-		background: #f4f6fa;
-		color: #333;
 		margin: 0;
+		color: #333;
+		height: fit-content;
+		background: #f4f6fa;
+		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	}
-
-	.go-button-div {
-		scale: 1;
-		color: #e7efff;
-		margin-left: 50%;
-		cursor: pointer;
-		width: fit-content;
-		border-radius: 5px;
-		background-color: #94b8e4;
-	}
-
-	.go-button-div:hover {
-		scale: 1.6 1.5;
-		transition: scale 0.1s ease-in-out;
-	}
-
-	.go-button {}
 
 	.choice-screen {
 		gap: 2rem;
@@ -43,13 +27,13 @@
 
 	.column {
 		flex: 1;
+		padding: 2rem;
+		display: flex;
 		background: white;
 		height: fit-content;
 		border-radius: 20px;
-		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-		padding: 2rem;
-		display: flex;
 		flex-direction: column;
+		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
 	}
 
 	h2 {
@@ -58,21 +42,28 @@
 	}
 
 	.button-grid {
-		display: grid;
 		gap: 1rem;
+		display: grid;
 	}
 
-	/* Shared button styles */
+	.button-grid-layout {
+		columns: 2;
+	}
+
+	.layout-btn {
+		width: 80% !important;
+	}
+
 	.layout-btn,
 	.theme-btn {
 		all: unset;
-		background: #e7efff;
-		border-radius: 16px;
 		padding: 1rem;
 		display: flex;
-		flex-direction: column;
-		align-items: center;
 		cursor: pointer;
+		align-items: center;
+		border-radius: 16px;
+		background: #e7efff;
+		flex-direction: column;
 		transition: background 0.2s ease;
 	}
 
@@ -83,54 +74,51 @@
 
 	.layout-btn.selected,
 	.theme-btn.selected {
-		outline: 3px solid #5599ff;
 		outline-offset: 3px;
 		background: #dceeff;
-		box-shadow: 0 0 0 3px rgba(85, 153, 255, 0.3);
 		transform: scale(1.02);
 		transition: all 0.15s ease;
+		outline: 3px solid #5599ff;
+		box-shadow: 0 0 0 3px rgba(85, 153, 255, 0.3);
 	}
 
 	.layout-skeleton {
 		width: 100%;
 		height: 80px;
-		background: #cbd9ec;
-		border-radius: 12px;
-		margin-bottom: 0.5rem;
-		position: relative;
 		overflow: hidden;
+		position: relative;
+		border-radius: 12px;
+		background: #cbd9ec;
+		margin-bottom: 0.5rem;
 	}
 
-	/* Top-Bottom layout (Notebook lines) */
 	.top-bottom {
+		gap: 0.3rem;
 		display: flex;
+		padding: 0.5rem;
+		background: none;
 		flex-direction: column;
 		justify-content: space-evenly;
-		padding: 0.5rem;
-		gap: 0.3rem;
-		background: none;
 	}
 
 	.top-bottom div {
+		width: 90%;
 		height: 6px;
+		opacity: 0.8;
+		margin-left: 5%;
 		border-radius: 4px;
 		background: #aac4e4;
-		margin-left: 5%;
-		width: 90%;
-		opacity: 0.8;
 	}
 
-	/* 20%-30%-50% layout */
 	.layout-203050-fixed {
-		display: flex;
-		flex-direction: column;
-		height: 80px;
-		/* Ensure height is defined */
-		width: 100%;
 		gap: 4px;
+		width: 100%;
 		padding: 4px;
-		box-sizing: border-box;
+		height: 80px;
+		display: flex;
 		background: none;
+		box-sizing: border-box;
+		flex-direction: column;
 	}
 
 	.layout-203050-fixed .row {
@@ -149,9 +137,9 @@
 	}
 
 	.slice {
-		background: #aac4e4;
-		border-radius: 6px;
 		height: 100%;
+		border-radius: 6px;
+		background: #aac4e4;
 	}
 
 	.slice-20 {
@@ -170,24 +158,22 @@
 		background: #7ca8e2;
 	}
 
-	/* Tiles layout (Grid!) */
 	.tiles {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: repeat(3, 1fr);
 		gap: 4px;
 		width: 90%;
 		padding: 4px;
+		display: grid;
 		background: none;
+		grid-template-rows: repeat(3, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 
 	.tiles div {
+		opacity: 0.9;
 		border-radius: 6px;
 		background: linear-gradient(145deg, #aac4e4, #94b8e4);
-		opacity: 0.9;
 	}
 
-	/* Card + Sections layout */
 	.card-sections {
 		width: 90%;
 		display: flex;
@@ -205,120 +191,112 @@
 		background: #94b8e4;
 		border-radius: 0 0 12px 12px;
 	}
+
+	.go-button:hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+		scale: 1.5;
+	}
+
+	.go-button {
+		scale: 1;
+		left: 45%;
+		width: 150px;
+
+		font-size: 25px;
+		cursor: pointer;
+		color: #e7efff;
+		text-align: center;
+
+		position: relative;
+		border-radius: 5px;
+		height: fit-content;
+
+		display: inline-block;
+		text-decoration: none;
+		background-color: #94b8e4;
+
+		translate: translate(-50%, -50%);
+		transition: scale 0.2s ease, box-shadow 0.2s ease;
+	}
 </style>
 
-<script>
-	let g_choiceTheme = "";
-	let g_choiceLayout = "";
-
-	document.addEventListener("DOMContentLoaded", () => {
-
-		document.querySelector(".go-button").addEventListener("click", () => {
-
-			if (!(g_choiceTheme && g_choiceLayout)) {
-
-				return;
-
-			}
-
-			window.location.href = `/resume.html?l=${g_choiceLayout}&&t=${g_choiceTheme}`;
-
-		});
-
-		document.querySelectorAll(".layout-btn").forEach(p_button => {
-
-			p_button.addEventListener("click", () => {
-
-				document.querySelectorAll(".layout-btn").forEach(b => b.classList.remove("selected"));
-				g_choiceLayout = p_button.getAttribute("data-layout");
-				p_button.classList.add("selected");
-
-			});
-
-		});
-
-		document.querySelectorAll(".theme-btn").forEach(p_button => {
-
-			p_button.addEventListener("click", () => {
-
-				document.querySelectorAll(".theme-btn").forEach(b => b.classList.remove("selected"));
-				g_choiceTheme = p_button.getAttribute("data-layout");
-				p_button.classList.add("selected");
-
-			});
-
-		});
-
-	});
-</script>
-
 <body>
+	<br>
+	<a
+		href=""
+		class="go-button"
+	>&nbsp;GO!&nbsp;</a>
 	<main class="choice-screen">
 		<!-- Layouts: -->
 		<section class="column layout-column">
 			<h2>Select Layout</h2>
-			<div class="button-grid">
-				<button
-					class="layout-btn"
-					data-layout="top-bottom"
-				>
-					<div class="layout-skeleton top-bottom">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-					<span>Top-Bottom</span>
-				</button>
+			<div class="button-grid-layout">
 
-				<button
-					class="layout-btn"
-					data-layout="203050"
-				>
-					<div class="layout-skeleton layout-203050-fixed">
-						<div class="row top-row">
-							<div class="slice slice-20"></div>
-							<div class="slice slice-30"></div>
+				<section>
+					<button
+						class="layout-btn"
+						data-layout="top-bottom"
+					>
+						<div class="layout-skeleton top-bottom">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
 						</div>
-						<div class="row bottom-row">
-							<div class="slice slice-50"></div>
+						<span>Top-Bottom</span>
+					</button>
+					<button
+						class="layout-btn"
+						data-layout="20-30-50"
+					>
+						<div class="layout-skeleton layout-203050-fixed">
+							<div class="row top-row">
+								<div class="slice slice-20"></div>
+								<div class="slice slice-30"></div>
+							</div>
+							<div class="row bottom-row">
+								<div class="slice slice-50"></div>
+							</div>
 						</div>
-					</div>
-					<span>20%-30%-50%</span>
-				</button>
+						<span>20%-30%-50%</span>
+					</button>
+				</section>
 
-				<button
-					class="layout-btn"
-					data-layout="tiles"
-				>
-					<div class="layout-skeleton tiles">
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-						<div></div>
-					</div>
-					<span>Tiles</span>
-				</button>
+				<section>
+					<button
+						class="layout-btn"
+						data-layout="tiles"
+					>
+						<div class="layout-skeleton tiles">
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+						<span>Tiles</span>
+					</button>
 
-				<button
-					class="layout-btn"
-					data-layout="card-sections"
-				>
-					<div class="layout-skeleton card-sections">
-						<div class="top"></div>
-						<div class="bottom"></div>
-					</div>
-					<span>Card + Sections</span>
-				</button>
+					<button
+						class="layout-btn"
+						data-layout="card-sections"
+					>
+						<div class="layout-skeleton card-sections">
+							<div class="top"></div>
+							<div class="bottom"></div>
+						</div>
+						<span>Card + Sections</span>
+					</button>
+				</section>
+
 			</div>
 		</section>
 
@@ -358,9 +336,98 @@
 			</div>
 		</section>
 	</main>
-	<div class="go-button-div">
-		<h2 class="go-button">&nbsp;GO!&nbsp;</h2>
-	</div>
 </body>
+
+<style>
+	.corporate-blue {
+		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+		box-shadow: 0 4px 12px rgba(0, 64, 128, 0.1);
+		background-color: #7397c7;
+		color: #133972;
+	}
+
+	.cybersec-black {
+		font-family: "Fira Code", monospace;
+		background-color: #0b0f10;
+		color: #54d3c9;
+	}
+
+	.frutiger-aero {
+		text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+		font-family: "Segoe UI", "Tahoma", sans-serif;
+		box-shadow: 0 0 12px rgba(0, 170, 255, 0.3);
+		background: rgba(0, 170, 255, 0.3);
+	}
+
+	.github-dark {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+		box-shadow: 0px 0px 12px #238636;
+		background-color: #30363d;
+		color: #4493f8;
+	}
+
+	.neon-lights {
+		color: #00f6ff;
+		background: #110e2b;
+		border: 2px solid #f0f;
+		font-family: "Orbitron", "Courier New", monospace;
+		box-shadow: 0 0 8px #0ff, 0 0 8px #f0f, 0 0 8px #0ff inset;
+	}
+
+	.kernel-org {
+		background-color: #171717;
+		border: 2px solid black;
+		font-family: monospace;
+		font-size: 11pt;
+		color: #28d;
+	}
+
+	.wise-rose {
+		background-color: #fdf3f7;
+		font-family: "Georgia", serif;
+		box-shadow: inset 0 0 12px rgba(170, 120, 135, 0.1);
+	}
+</style>
+
+<script>
+	let g_choiceTheme = "";
+	let g_choiceLayout = "";
+
+	document.addEventListener("DOMContentLoaded", () => {
+
+		const anchorGo = document.querySelector(".go-button");
+		const createUrl = () => `/resume.html?l=${g_choiceLayout}&&t=${g_choiceTheme}`;
+		const cbckAssignUrl = () => anchorGo.href = (g_choiceTheme && g_choiceLayout) ? createUrl() : "";
+
+		anchorGo.addEventListener("click", (p_event) => window.location.href = createUrl());
+
+		document.querySelectorAll(".layout-btn").forEach(p_button => {
+
+			p_button.addEventListener("click", () => {
+
+				document.querySelectorAll(".layout-btn").forEach(b => b.classList.remove("selected"));
+				g_choiceLayout = p_button.getAttribute("data-layout");
+				p_button.classList.add("selected");
+				cbckAssignUrl();
+
+			});
+
+		});
+
+		document.querySelectorAll(".theme-btn").forEach(p_button => {
+
+			p_button.addEventListener("click", () => {
+
+				document.querySelectorAll(".theme-btn").forEach(b => b.classList.remove("selected"));
+				g_choiceTheme = p_button.getAttribute("data-layout");
+				p_button.classList.add("selected");
+				cbckAssignUrl();
+
+			});
+
+		});
+
+	});
+</script>
 
 </html>

@@ -1,5 +1,9 @@
+.top-card {
+	background: #0c1113;
+}
+
 body {
-	font-family: 'Fira Code', monospace;
+	font-family: "Fira Code", monospace;
 	background-color: #0b0f10;
 	color: #54d3c9;
 	margin: 0;
@@ -21,8 +25,8 @@ body {
 }
 
 .section {
-	padding: 1.25rem 1.5rem;
 	background: #0c1113;
+	padding: 1.25rem 1.5rem;
 	border: 1px solid #1b2528;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(84, 211, 201, 0.08);

@@ -11,36 +11,95 @@
 </head>
 
 <script>
+	let g_layout = "", g_theme = "";
+	const reveal = () => document.body.style.display = "block";
+	const g_params = new URLSearchParams(new URL(window.location.href).search);
+
+	// Hi, *uhh*, we *correct* stuff!
+	function correct() {
+		// "YOU *SERIOUSLY WANT TO* MAKE ANOTHER API CALL TO LOAD YOUR SCRIPTS THAT *CORRECT STUFF?!*"
+		// ...Well, *that's why* there's less "modularity" here.
+		// Have fun with software principles, junior!
+
+		switch (g_theme) {
+
+			case "kernel-org": {
+
+				switch (g_layout) {
+
+					case "top-bottom": {
+
+
+					}
+
+					case "card-sections": {
+
+
+
+					} break;
+
+				} break;
+
+			} break;
+
+			case "github-dark": {
+
+				switch (g_layout) {
+
+					case "top-bottom": {
+
+
+					}
+
+					case "card-sections": {
+
+
+
+					} break;
+
+				} break;
+
+			} break;
+
+		}
+	}
+
+	// Load the loadings!...:
+	async function load() {
+		// Destructuring ain't "slow", but:
+		const css = document.createElement("link");
+		const html = await fetch(`/layout/${g_layout}.html`);
+		const javascript = await fetch(`/js/${g_layout}.js`);
+
+		// Forcing JS execution via dynamic amendment.
+		// Can"t use "em `<script>`s already in the HTML!:
+
+		document.body.insertAdjacentHTML("afterbegin", await html.text());
+		css.href = `/theme/${g_theme}.css`; css.rel = "stylesheet"; document.body.appendChild(css);
+		document.body.appendChild(document.createElement("script")).textContent = await javascript.text();
+
+		correct();
+		reveal();
+	}
+
 	document.addEventListener("DOMContentLoaded", () => {
 
-		const params = new URLSearchParams(new URL(window.location.href).search);
+		const btnSectAdd = document.getElementById("add-section-btn");
 		const btnPrint = document.getElementById("print-btn");
-		const resume = document.getElementById("resume");
-		const layout = params.get("l");
-		const theme = params.get("t");
+		const divResume = document.getElementById("resume");
 
-		document.body.innerHTML += `<link rel="stylesheet" href="${`/theme/${theme}.css`}">`;
+		g_theme = g_params.get("t");
+		g_layout = g_params.get("l");
+		document.body.style.display = "none"; // For instant display. No clunky loading!
 
-		fetch(`/layout/${layout}.html`).then((p_response) => {
+		btnSectAdd.addEventListener("click", () => {
 
-			p_response.text().then((p_html) => {
-
-				document.body.insertAdjacentHTML("beforebegin", p_html);
-
-				// Fetch JS ONLY when HTML exists:
-				fetch(`/js/${layout}.js`).then((p_response) => {
-
-					p_response.text().then((p_js) => {
-
-						document.body.appendChild(document.createElement("script")).textContent = p_js;
-
-					});
-
-				});
-
-			});
+			btnSectAdd.scrollIntoView({ behavior: "smooth" });
+			// window.scrollTo({ top: btnSectAdd.getBoundingClientRect().top + window.pageYOffset, behavior: "smooth" });
 
 		});
+
+		load();
 
 	});
 </script>

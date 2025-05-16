@@ -1,0 +1,39 @@
+<div
+    id="resume"
+    class="layout-tiles"
+></div>
+
+<template id="section">
+    <div class="section">
+        <h2><textarea class="user-editable-h2"># Tile Section</textarea></h2>
+        <p><textarea class="user-editable-p"></textarea></p>
+        <button class="remove-section-btn">x</button>
+    </div>
+</template>
+
+<style>
+    .layout-tiles {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        padding: 2rem;
+    }
+
+    .section {
+        padding: 1rem;
+        border-radius: 8px;
+        background: #fdfdfd;
+        border: 1px dashed #bbb;
+        position: relative;
+    }
+
+    .remove-section-btn {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: transparent;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>

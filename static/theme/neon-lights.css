@@ -1,5 +1,9 @@
+.top-card {
+	background: linear-gradient(135deg, rgba(20, 20, 40, 0.8), rgba(0, 0, 0, 0.6));
+}
+
 body {
-	font-family: 'Orbitron', 'Courier New', monospace;
+	font-family: "Orbitron", "Courier New", monospace;
 	background: linear-gradient(90deg, #0f0c29, #24243e);
 	color: #00f6ff;
 	margin: 0;

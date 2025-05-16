@@ -1,3 +1,7 @@
+.top-card {
+	background: #f0f6ff;
+}
+
 body {
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 	background-color: #f9fbfd;
@@ -62,17 +66,17 @@ p {
 }
 
 .remove-section-btn {
-	background: #e03030;
-	color: grey;
-	border: none;
-	border-radius: 6px;
 	padding: 0.25rem 0.5rem;
-	cursor: pointer;
-	float: right;
+	background: #e03030;
+	border-radius: 6px;
 	font-weight: bold;
+	cursor: pointer;
+	color: white;
+	float: right;
+	border: none;
 }
 
 .remove-section-btn:hover {
 	background: #b02020;
-	color: white;
+	color: grey;
 }

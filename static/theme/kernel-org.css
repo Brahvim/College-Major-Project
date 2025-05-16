@@ -1,65 +1,85 @@
-/* For NO REASON, colors go away when printing :|! */
-/* THIS fixes THAT: */
-@media print {
-	.user-editable-h2 {
-		color: #0502a4 !important;
-	}
+.top-card {
+	background-color: #171717;
 }
 
 body {
-	background-color: white;
+	background-color: #171717;
 }
 
 #resume {
+	background-color: #171717;
 	font-family: monospace;
-	background-color: white;
-	padding: 2rem;
 	line-height: 1.6;
+	padding: 2rem;
 }
 
 .section {
-	background-color: white;
+	box-shadow: inset 0 0 4px #00000066;
+	background-color: #171717;
 	border: 1px solid #444;
+	/* margin-bottom: 1.5rem; */
 	border-radius: 4px;
-	padding: 1rem;
-	margin-bottom: 1.5rem;
-	/* box-shadow: inset 0 0 4px #00000066; */
+	/* padding: 1rem; */
 }
 
-textarea.user-editable-h2,
-textarea.user-editable-p {
-	background-color: white;
-	padding: 0.5rem;
-	width: 100%;
+.user-editable-h2,
+.user-editable-p {
+	background-color: #171717;
 	font-family: inherit;
+	/* padding: 0.5rem; */
+	width: 80%;
 }
 
-textarea.user-editable-h2 {
-	color: #0502a4;
+.user-editable-h2 {
+	color: #28d;
 	font-size: 1.2rem;
 	font-weight: bold;
 }
 
-textarea.user-editable-p {
-	color: black;
+
+.top-card .user-editable-h2,
+.top-card .user-editable-p {
+	margin-left: 0%;
+	border: 0px;
+}
+
+.section .user-editable-h2 {
+	align-items: center;
+	text-align: center;
+	margin-left: 20%;
+	width: 80%;
+}
+
+.section .user-editable-p {
+	align-items: center;
+	margin-left: 10%;
+}
+
+.section {
+	text-align: center;
+	align-items: center;
+}
+
+.user-editable-p {
+	color: #28d;
 	font-size: 1rem;
-	border-radius: 3px;
-	border: 1px solid #555;
+	/* border-radius: 3px; */
+	/* border: 1px solid #555; */
 }
 
 .remove-section-btn {
-	color: #ccc;
-	background-color: #3a3a3a;
+	color: #28d;
 	border: none;
-	border-radius: 6px;
-	padding: 0.25rem 0.75rem;
 	cursor: pointer;
 	font-weight: bold;
-	/* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+	border-radius: 6px;
+	padding: 0.25rem 0.75rem;
+	background-color: #3a3a3a;
 	transition: background 0.2s ease;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .remove-section-btn:hover {
 	background-color: #555;
-	color: #fff;
+	color: #28d;
 }

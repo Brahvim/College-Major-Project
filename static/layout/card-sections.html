@@ -1,0 +1,80 @@
+<div
+	id="resume"
+	class="layout-card-sections"
+>
+	<div class="top-card">
+		<h2><textarea class="user-editable-h2">Topmost card, cannot be deleted!</textarea></h2>
+		<p><textarea class="user-editable-p">Paragraph text goes here!...</textarea></p>
+	</div>
+	<div id="card-section-list"></div>
+</div>
+
+<template id="section">
+	<h2><textarea class="user-editable-h2"># Section</textarea></h2>
+	<p><textarea class="user-editable-p"></textarea></p>
+	<button class="remove-section-btn">x</button>
+</template>
+
+<style>
+	@media print {
+
+		.remove-section-btn {
+			display: none;
+		}
+
+	}
+
+	.layout-card-sections {
+		flex-direction: column;
+		max-width: 800px;
+		padding: 2rem;
+		display: flex;
+		margin: auto;
+		gap: 1.5rem;
+	}
+
+	.top-card {
+		border-radius: 12px;
+	}
+
+	.top-card .user-editable-h2 {
+		width: 95%;
+		height: auto;
+		text-align: center;
+	}
+
+	.top-card .user-editable-p {
+		width: 95%;
+		font-size: 18px;
+		text-align: center;
+	}
+
+	.section .user-editable-p {
+		font-size: 18px;
+		text-align: center;
+	}
+
+	.section .user-editable-h2 {
+		width: 80%;
+		margin-left: 10%;
+		text-align: center;
+	}
+
+	.section {
+		padding: 1rem;
+		border-radius: 8px;
+		position: relative;
+		background: #fdfdfd;
+		border: 1px dashed #bbb;
+	}
+
+	.remove-section-btn {
+		background: transparent;
+		position: absolute;
+		font-weight: bold;
+		cursor: pointer;
+		right: 0.5rem;
+		border: none;
+		top: 0.5rem;
+	}
+</style>

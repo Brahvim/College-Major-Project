@@ -1,5 +1,9 @@
+.top-card {
+	background: linear-gradient(to bottom, #fdf3f7, #fff);
+}
+
 body {
-	font-family: 'Georgia', serif;
+	font-family: "Georgia", serif;
 	background: linear-gradient(to bottom, #fdf6f9, #f5e7ec);
 	color: #3b1f2b;
 	margin: 0;
