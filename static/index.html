@@ -23,6 +23,10 @@
 		padding: 2rem;
 		height: fit-content;
 		box-sizing: border-box;
+
+		@media (max-width: 768px) {
+			flex-direction: column;
+		}
 	}
 
 	.column {
@@ -197,9 +201,18 @@
 		scale: 1.5;
 	}
 
+	/* It WORKS when INSIDE `.go-button { }`. */
+	/* VSCode just WON'T highlight it properly!!! */
+	@media (max-width: 768px) {
+		.go-button {
+			left: 30vw;
+		}
+	}
+
 	.go-button {
 		scale: 1;
-		left: 45%;
+		left: 45vw;
+
 		width: 150px;
 
 		font-size: 25px;
@@ -216,7 +229,8 @@
 		background-color: #94b8e4;
 
 		translate: translate(-50%, -50%);
-		transition: scale 0.2s ease, box-shadow 0.2s ease;
+		transition: scale 0.2s ease,
+			box-shadow 0.2s ease;
 	}
 </style>
 
