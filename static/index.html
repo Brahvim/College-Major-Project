@@ -201,17 +201,10 @@
 		scale: 1.5;
 	}
 
-	/* It WORKS when INSIDE `.go-button { }`. */
-	/* VSCode just WON'T highlight it properly!!! */
-	@media (max-width: 768px) {
-		.go-button {
-			left: 30vw;
-		}
-	}
-
 	.go-button {
 		scale: 1;
-		left: 45vw;
+		top: 2.5vh;
+		left: 50vw;
 
 		width: 150px;
 
@@ -228,9 +221,8 @@
 		text-decoration: none;
 		background-color: #94b8e4;
 
-		translate: translate(-50%, -50%);
-		transition: scale 0.2s ease,
-			box-shadow 0.2s ease;
+		translate: -50% -50%;
+		transition: scale 0.2s ease, box-shadow 0.2s ease;
 	}
 </style>
 
@@ -248,7 +240,7 @@
 
 				<section>
 					<button
-						class="layout-btn"
+						class="layout-btn layout-btn-top-bottom"
 						data-layout="top-bottom"
 					>
 						<div class="layout-skeleton top-bottom">
@@ -261,7 +253,7 @@
 						<span>Top-Bottom</span>
 					</button>
 					<button
-						class="layout-btn"
+						class="layout-btn layout-btn-20-30-50"
 						data-layout="20-30-50"
 					>
 						<div class="layout-skeleton layout-203050-fixed">
@@ -279,7 +271,7 @@
 
 				<section>
 					<button
-						class="layout-btn"
+						class="layout-btn layout-btn-tiles"
 						data-layout="tiles"
 					>
 						<div class="layout-skeleton tiles">
@@ -300,7 +292,7 @@
 					</button>
 
 					<button
-						class="layout-btn"
+						class="layout-btn layout-btn-card-sections"
 						data-layout="card-sections"
 					>
 						<div class="layout-skeleton card-sections">
@@ -318,30 +310,37 @@
 		<section class="column theme-column">
 			<h2>Select Theme</h2>
 			<div class="button-grid">
+
 				<button
 					data-layout="corporate-blue"
 					class="theme-btn corporate-blue"
 				>Corporate Blue</button>
+
 				<button
 					data-layout="frutiger-aero"
 					class="theme-btn frutiger-aero"
 				>Frutiger Aero</button>
+
 				<button
 					data-layout="wise-rose"
 					class="theme-btn wise-rose"
 				>Wise Rose</button>
+
 				<button
 					data-layout="neon-lights"
 					class="theme-btn neon-lights"
 				>Neon Lights</button>
+
 				<button
 					data-layout="cybersec-black"
 					class="theme-btn cybersec-black"
 				>Cybersec Black</button>
+
 				<button
 					data-layout="kernel-org"
 					class="theme-btn kernel-org"
 				>Kernel.org Theme</button>
+
 				<button
 					data-layout="github-dark"
 					class="theme-btn github-dark"
@@ -404,23 +403,28 @@
 </style>
 
 <script>
-	let g_choiceTheme = "";
-	let g_choiceLayout = "";
+	let g_choiceTheme = sessionStorage.getItem("theme") ?? "";
+	let g_choiceLayout = sessionStorage.getItem("layout") ?? "";
 
 	document.addEventListener("DOMContentLoaded", () => {
 
 		const anchorGo = document.querySelector(".go-button");
+		const btnArrayTheme = [...document.querySelectorAll(".theme-btn")];
+		const btnArrayLayout = [...document.querySelectorAll(".layout-btn")];
 		const createUrl = () => `/resume.html?l=${g_choiceLayout}&&t=${g_choiceTheme}`;
 		const cbckAssignUrl = () => anchorGo.href = (g_choiceTheme && g_choiceLayout) ? createUrl() : "";
 
 		anchorGo.addEventListener("click", (p_event) => window.location.href = createUrl());
+		try { document.querySelector(`.theme-btn.${g_choiceTheme}`).classList.add("selected"); } catch { };
+		try { document.querySelector(`.layout-btn.layout-btn-${g_choiceLayout}`).classList.add("selected"); } catch { };
 
-		document.querySelectorAll(".layout-btn").forEach(p_button => {
+		btnArrayLayout.forEach(p_button => {
 
 			p_button.addEventListener("click", () => {
 
-				document.querySelectorAll(".layout-btn").forEach(b => b.classList.remove("selected"));
+				btnArrayLayout.forEach(b => b.classList.remove("selected"));
 				g_choiceLayout = p_button.getAttribute("data-layout");
+				sessionStorage.setItem("layout", g_choiceLayout);
 				p_button.classList.add("selected");
 				cbckAssignUrl();
 
@@ -428,12 +432,13 @@
 
 		});
 
-		document.querySelectorAll(".theme-btn").forEach(p_button => {
+		btnArrayTheme.forEach(p_button => {
 
 			p_button.addEventListener("click", () => {
 
-				document.querySelectorAll(".theme-btn").forEach(b => b.classList.remove("selected"));
+				btnArrayTheme.forEach(b => b.classList.remove("selected"));
 				g_choiceTheme = p_button.getAttribute("data-layout");
+				sessionStorage.setItem("theme", g_choiceTheme);
 				p_button.classList.add("selected");
 				cbckAssignUrl();
 
