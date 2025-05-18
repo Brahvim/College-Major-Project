@@ -7,7 +7,7 @@
 		name="viewport"
 		content="width=device-width, initial-scale=1.0"
 	>
-	<title>Résum󠃩é</title>
+	<title>Templates Résum󠃩é Builder</title>
 </head>
 
 <script>
@@ -105,11 +105,33 @@
 </script>
 
 <body>
+	<!-- <style>
+		body {
+			background-color: white;
+
+			@media (prefers-color-scheme: dark) {
+				background-color: black !important;
+			}
+		}
+	</style> -->
+
 	<div id="section-manager-container">
-		<button id="add-section-btn">Add Section</button>
-		<button id="print-btn">Print</button>
+		<button
+			class="control-btn"
+			id="print-btn"
+		>Print</button>
+		<a
+			class="control-btn"
+			id="home-button"
+			href="/"
+		>Templates</a>
+		<button
+			class="control-btn"
+			id="add-section-btn"
+		>Add Section</button>
 	</div>
 </body>
+
 
 <style>
 	@media print {
@@ -131,25 +153,18 @@
 		margin-left: 2px;
 	}
 
-	#add-section-btn {
-		padding: 0.5rem 1rem;
-		font-size: 1rem;
+	.control-btn {
 		border: none;
-		border-radius: 6px;
-		background: #5599ff;
 		color: white;
 		cursor: pointer;
-		transition: background 0.2s ease;
-	}
-
-	#print-btn {
-		padding: 0.5rem 1rem;
 		font-size: 1rem;
-		border: none;
+		margin-left: 2px;
+		text-align: center;
 		border-radius: 6px;
+		padding: 0.5rem 1rem;
 		background: #5599ff;
-		color: white;
-		cursor: pointer;
+		text-decoration: none;
+		font-family: sans-serif;
 		transition: background 0.2s ease;
 	}
 
@@ -159,11 +174,7 @@
 		border-radius: 16px;
 	}
 
-	#print-btn:hover {
-		background: #407ddf;
-	}
-
-	#add-section-btn:hover {
+	#control-btn:hover {
 		background: #407ddf;
 	}
 </style>

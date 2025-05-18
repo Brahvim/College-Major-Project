@@ -1,0 +1,187 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: black;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.choice-screen {
+    gap: 2rem;
+    display: flex;
+    padding: 2rem;
+    height: fit-content;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.column {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    color: white;
+    height: fit-content;
+    border-radius: 20px;
+    flex-direction: column;
+    background: rgb(28, 28, 28);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+h2 {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.button-grid {
+    gap: 1rem;
+    display: grid;
+}
+
+.button-grid-layout {
+    columns: 2;
+}
+
+.layout-btn {
+    width: 80% !important;
+    color: black !important;
+}
+
+.layout-btn,
+.theme-btn {
+    all: unset;
+    padding: 1rem;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    border-radius: 16px;
+    background: #525252;
+    flex-direction: column;
+    transition: background 0.2s ease;
+}
+
+.layout-btn:hover,
+.theme-btn:hover {
+    background: rgb(197, 197, 197);
+}
+
+.layout-btn.selected,
+.theme-btn.selected {
+    outline-offset: 3px;
+    background: #dceeff;
+    transform: scale(1.02);
+    transition: all 0.15s ease;
+    outline: 3px solid #5599ff;
+    box-shadow: 0 0 0 3px rgba(85, 153, 255, 0.3);
+}
+
+.layout-skeleton {
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+    background: #cbd9ec;
+    margin-bottom: 0.5rem;
+}
+
+.top-bottom {
+    gap: 0.3rem;
+    display: flex;
+    padding: 0.5rem;
+    background: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.top-bottom div {
+    width: 90%;
+    height: 6px;
+    opacity: 0.8;
+    margin-left: 5%;
+    border-radius: 4px;
+    background: black;
+}
+
+.layout-203050-fixed {
+    gap: 4px;
+    width: 100%;
+    padding: 4px;
+    height: 80px;
+    display: flex;
+    background: none;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.layout-203050-fixed .row {
+    margin-left: 5%;
+    display: flex;
+    width: 90%;
+    gap: 4px;
+}
+
+.layout-203050-fixed .top-row {
+    height: 40%;
+}
+
+.layout-203050-fixed .bottom-row {
+    height: 60%;
+}
+
+.slice {
+    height: 100%;
+    border-radius: 6px;
+    background: white;
+}
+
+.slice-20 {
+    width: 30%;
+    height: 100%;
+    background: black;
+}
+
+.slice-30 {
+    width: 70%;
+    background: black;
+}
+
+.slice-50 {
+    width: 100%;
+    background: black;
+}
+
+.tiles {
+    gap: 4px;
+    width: 90%;
+    padding: 4px;
+    display: grid;
+    background: none;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.tiles div {
+    opacity: 0.9;
+    border-radius: 6px;
+    background: linear-gradient(145deg, rgb(83, 83, 83), rgb(25, 25, 25));
+}
+
+.card-sections {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-sections .top {
+    height: 30%;
+    background: grey;
+    border-radius: 12px 12px 0 0;
+}
+
+.card-sections .bottom {
+    height: 70%;
+    background: black;
+    border-radius: 0 0 12px 12px;
+}
