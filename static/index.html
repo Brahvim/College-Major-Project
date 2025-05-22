@@ -20,18 +20,103 @@
 >
 
 <script>
-	if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+	document.addEventListener("DOMContentLoaded", () => {
 
-		document.getElementById("light").disabled = true;
+		const btnPageTheme = document.getElementById("page-theme-btn");
+		const btnPageThemeDiv = btnPageTheme.querySelector("div");
+		const divLabel = document.getElementById("theme-label");
+		const styleLight = document.getElementById("light");
+		const styleDark = document.getElementById("dark");
 
-	} else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+		const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+		let theme = localStorage.getItem("theme");
 
-		document.getElementById("dark").disabled = true;
+		if (!theme) {
 
-	}
+			theme = prefersDark ? "dark" : "light";
+
+		}
+
+		styleApply(theme);
+
+		btnPageTheme.addEventListener("click", () => {
+
+			theme = (theme === "dark") ? "light" : "dark";
+			localStorage.setItem("theme", theme);
+			styleApply(theme);
+
+		});
+
+		function styleApply(p_theme) {
+			if (p_theme === "dark") {
+
+				styleDark.disabled = false;
+				styleLight.disabled = true;
+				divLabel.classList.remove("toggled");
+				btnPageTheme.classList.remove("toggled");
+
+			} else {
+
+				styleDark.disabled = true;
+				styleLight.disabled = false;
+				divLabel.classList.add("toggled");
+				btnPageTheme.classList.add("toggled");
+
+			}
+		}
+
+	});
 </script>
 
+<style id="page-theme-btn-style">
+	#page-theme-btn {
+		background-color: white;
+		border-radius: 50px;
+		margin-bottom: 0%;
+		margin-left: 20px;
+		cursor: pointer;
+		height: 40px;
+		width: 70px;
+	}
+
+	#page-theme-btn div {
+		transition: margin-left 0.2s ease-in, background-color 0.2s ease-in;
+		box-shadow: 0 0 10px black;
+		background-color: white;
+		border-radius: 100%;
+		margin-left: 0%;
+		height: 80%;
+		width: 50%;
+	}
+
+	#page-theme-btn.toggled div {
+		box-shadow: 0 0 10px white;
+		background-color: black;
+		margin-left: 50%;
+	}
+
+	#theme-label {
+		/* transform: translate(-50%, -50%); */
+		transition: color 0.2s ease-in;
+		margin-bottom: 0%;
+		margin-left: 45%;
+		margin-top: 0%;
+		color: white;
+	}
+
+	#theme-label.toggled {
+		color: black;
+	}
+</style>
+
 <body>
+	<!-- The switch: -->
+	<p id="theme-label">
+		Theme: <button id="page-theme-btn">
+			<div></div>
+		</button>
+	</p>
+	<!-- The label below it: -->
 	<main class="choice-screen">
 		<!-- Layouts: -->
 		<section class="column layout-column">
