@@ -94,8 +94,12 @@
 
 		btnSectAdd.addEventListener("click", () => {
 
-			btnSectAdd.scrollIntoView({ behavior: "smooth" });
-			// window.scrollTo({ top: btnSectAdd.getBoundingClientRect().top + window.pageYOffset, behavior: "smooth" });
+			// btnSectAdd.scrollIntoView({ behavior: "smooth" });
+			// const rect = btnSectAdd.getBoundingClientRect();
+			// window.scrollTo({ top: (8 * rect.height) + rect.bottom + window.pageYOffset, behavior: "smooth" });
+
+			// window.scrollTo({ top: window.innerHeight + window.pageYOffset + divResume.getBoundingClientRect().bottom, behavior: "smooth" });
+			window.scrollTo({ top: window.innerHeight + window.pageYOffset + divResume.getBoundingClientRect().bottom, behavior: "smooth" });
 
 		});
 
@@ -105,30 +109,20 @@
 </script>
 
 <body>
-	<!-- <style>
-		body {
-			background-color: white;
-
-			@media (prefers-color-scheme: dark) {
-				background-color: black !important;
-			}
-		}
-	</style> -->
-
 	<div id="section-manager-container">
-		<button
-			class="control-btn"
-			id="print-btn"
-		>Print</button>
 		<a
 			class="control-btn"
 			id="home-button"
 			href="/"
-		>Templates</a>
+		><br>&lt;&mdash;</a>
+		<button
+			class="control-btn"
+			id="print-btn"
+		>Print</button>
 		<button
 			class="control-btn"
 			id="add-section-btn"
-		>Add Section</button>
+		>+</button>
 	</div>
 </body>
 
@@ -147,6 +141,7 @@
 		display: flex;
 		margin-top: 2rem;
 		justify-content: center;
+		text-align: center center;
 	}
 
 	#section-manager-container button {
@@ -154,14 +149,15 @@
 	}
 
 	.control-btn {
+		width: 150px;
+		height: 50px;
 		border: none;
 		color: white;
 		cursor: pointer;
-		font-size: 1rem;
-		margin-left: 2px;
+		/* Clearly here for only `.home-button`: */
+		line-height: 1rem;
 		text-align: center;
 		border-radius: 6px;
-		padding: 0.5rem 1rem;
 		background: #5599ff;
 		text-decoration: none;
 		font-family: sans-serif;
@@ -174,7 +170,7 @@
 		border-radius: 16px;
 	}
 
-	#control-btn:hover {
+	.control-btn:hover {
 		background: #407ddf;
 	}
 </style>

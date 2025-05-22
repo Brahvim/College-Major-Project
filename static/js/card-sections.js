@@ -1,4 +1,5 @@
 let g_sectCount = 0;
+const g_divResume = document.getElementById("resume");
 const g_btnPrint = document.getElementById("print-btn");
 const g_templateSect = document.getElementById("section");
 const g_btnSectAdd = document.getElementById("add-section-btn");
@@ -8,7 +9,6 @@ g_btnPrint.addEventListener("click", () => window.print());
 
 g_btnSectAdd.addEventListener("click", () => {
 
-	const resume = document.getElementById("resume");
 	const newSection = document.createElement("div");
 
 	newSection.className = "section";
@@ -16,7 +16,7 @@ g_btnSectAdd.addEventListener("click", () => {
 	newSection.appendChild(g_templateSect.content.cloneNode(true)); // Clones `content` node, not the `<template>` node itself!
 
 	++g_sectCount;
-	resume.insertAdjacentElement("beforeend", newSection);
-	newSection.querySelector(".remove-section-btn").addEventListener("click", () => resume.removeChild(newSection));
+	g_divResume.insertAdjacentElement("beforeend", newSection);
+	newSection.querySelector(".remove-section-btn").addEventListener("click", () => g_divResume.removeChild(newSection));
 
 });
