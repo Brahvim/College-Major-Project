@@ -70,16 +70,15 @@ p {
 
 .remove-section-btn {
 	border: none;
-	color: grey;
 	cursor: pointer;
+	color: #5d2b40;
 	font-weight: bold;
-	background: grey;
 	border-radius: 8px;
+	background: white;
 	padding: 0.25rem 0.75rem;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .remove-section-btn:hover {
-	color: white;
-	background: white;
+	background: grey;
 }

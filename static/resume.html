@@ -133,7 +133,7 @@
 
 		const resize = () => {
 
-			console.log("Resized.");
+			// console.log("Resized.");
 			p_textarea.style.height = "auto";
 			p_textarea.style.height = (p_textarea.scrollHeight - 1) + "px";
 
@@ -147,16 +147,16 @@
 	const textareaMakeAllResizable = () => [...document.getElementsByTagName("textarea")].forEach(textareaMakeResizable);
 
 	// At least on FF, printing screws resizing!:
-	// window.addEventListener("afterprint", () => {
+	window.addEventListener("beforeprint", () => {
 
-	// 	document.addEventListener("focusin", function () {
+		document.addEventListener("focusin", function () {
 
-	// 		textareaMakeAllResizable();
-	// 		document.removeEventListener(this);
+			textareaMakeAllResizable();
+			document.removeEventListener(this);
 
-	// 	});
+		});
 
-	// });
+	});
 
 	document.addEventListener("DOMContentLoaded", () => {
 
@@ -184,6 +184,8 @@
 			const files = p_event.target.files;
 
 			if (active && active.tagName === "TEXTAREA") {
+
+				// console.log(active);
 
 				const start = active.selectionStart;
 				const before = active.value.substring(0, start);
