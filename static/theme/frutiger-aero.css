@@ -76,17 +76,17 @@ p {
 }
 
 .remove-section-btn {
-	color: grey;
 	border: none;
+	color: white;
 	border-radius: 8px;
 	padding: 0.25rem 0.75rem;
 	cursor: pointer;
 	font-weight: bold;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-	background: linear-gradient(145deg, #ff6c6c, #ffbaba);
+	background: linear-gradient(145deg, #e04040, #ff9e9e);
 }
 
 .remove-section-btn:hover {
-	color: white;
-	background: linear-gradient(145deg, #e04040, #ff9e9e);
+	color: grey;
+	background: linear-gradient(145deg, #ff6c6c, #ffbaba);
 }

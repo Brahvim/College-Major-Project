@@ -69,12 +69,12 @@ p {
 	border-radius: 6px;
 	font-weight: bold;
 	cursor: pointer;
-	color: black;
+	color: white;
 	float: right;
 	border: none;
 }
 
 .remove-section-btn:hover {
 	background: #b02020;
-	color: white;
+	color: black;
 }
