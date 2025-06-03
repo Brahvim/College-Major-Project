@@ -20,6 +20,16 @@
 
 	];
 
+	/** @type Record<string, string> */
+	const g_defaultSectCountPerLayout = {
+
+		"tiles": 2,
+		"20-30-50": 2,
+		"top-bottom": 0,
+		"card-sections": 0,
+
+	};
+
 	/** @type HTMLElement */
 	let g_btnPrint;
 
@@ -36,8 +46,8 @@
 	let g_lastTextArea;
 
 	const g_params = new URLSearchParams(new URL(window.location.href).search);
-	const reveal = () => document.body.style.display = "block";
 	let g_layout = g_params.get("l"), g_theme = g_params.get("t");
+	const reveal = () => document.body.style.display = "block";
 
 	// Hi, *uhh*, we *correct* stuff!
 	function correct() {
@@ -132,11 +142,17 @@
 		// Forcing JS execution via dynamic amendment.
 		// Can"t use "em `<script>`s already in the HTML!:
 
-		document.body.insertAdjacentHTML("afterbegin", await html.text());
+		document.body.insertAdjacentHTML("beforeend", await html.text());
 		css.href = `/theme/${g_theme}.css`; css.rel = "stylesheet"; document.body.appendChild(css);
 		document.body.appendChild(document.createElement("script")).textContent = await javascript.text();
 
 		g_divResume = document.getElementById("resume");
+
+		for (let i = 0; i < g_defaultSectCountPerLayout[g_layout]; i++) {
+
+			g_btnSectAdd.click();
+
+		}
 
 		correct();
 		reveal();
@@ -297,11 +313,14 @@
 	}
 
 	#section-manager-container {
-		columns: 2;
+		z-index: 1;
 		display: flex;
-		margin-top: 2rem;
+		position: fixed;
+		margin-left: 50%;
 		text-align: center;
+		flex-direction: row;
 		justify-content: center;
+		transform: translate(-50%, -50%);
 	}
 
 	#section-manager-container button {

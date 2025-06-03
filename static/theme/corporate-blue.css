@@ -64,8 +64,8 @@ p {
 }
 
 .remove-section-btn {
+	background: #e03030 !important;
 	padding: 0.25rem 0.5rem;
-	background: #e03030;
 	border-radius: 6px;
 	font-weight: bold;
 	cursor: pointer;
