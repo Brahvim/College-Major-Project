@@ -11,6 +11,15 @@
 </head>
 
 <script>
+	/** @type HTMLElement[] */
+	const g_textareaScalingLayouts = [
+
+		"20-30-50",
+		"top-bottom",
+		"card-sections",
+
+	];
+
 	/** @type HTMLElement */
 	let g_btnPrint;
 
@@ -26,9 +35,9 @@
 	/** @type EventTarget */
 	let g_lastTextArea;
 
-	let g_layout = "", g_theme = "";
-	const reveal = () => document.body.style.display = "block";
 	const g_params = new URLSearchParams(new URL(window.location.href).search);
+	const reveal = () => document.body.style.display = "block";
+	let g_layout = g_params.get("l"), g_theme = g_params.get("t");
 
 	// Hi, *uhh*, we *correct* stuff!
 	function correct() {
@@ -137,22 +146,23 @@
 	 * From [ https://stackoverflow.com/a/25621277 ]!
 	 * @param {HTMLTextAreaElement} p_textarea
 	 */
-	function textareaMakeResizable(p_textarea) {
-		p_textarea.style.height = "auto";
-		p_textarea.style.overflowY = "hidden";
-
-		const resize = () => {
-
-			// console.log("Resized.");
+	const textareaMakeResizable = !g_textareaScalingLayouts.includes(g_layout)
+		? () => { }
+		: (p_textarea) => {
 			p_textarea.style.height = "auto";
-			p_textarea.style.height = (p_textarea.scrollHeight - 1) + "px";
+			p_textarea.style.overflowY = "hidden";
 
-		};
+			const resize = () => {
 
-		p_textarea.addEventListener("input", resize);
-		p_textarea.addEventListener("focusout", resize);
-		p_textarea.addEventListener("focusin", resize);
-	}
+				p_textarea.style.height = "auto";
+				p_textarea.style.height = (p_textarea.scrollHeight - 1) + "px";
+
+			};
+
+			p_textarea.addEventListener("input", resize);
+			p_textarea.addEventListener("focusin", resize);
+			p_textarea.addEventListener("focusout", resize);
+		}
 
 	const textareaMakeAllResizable = () => [...document.getElementsByTagName("textarea")].forEach(textareaMakeResizable);
 
@@ -175,8 +185,6 @@
 		g_btnAddImage = document.querySelector(`#add-image-btn input[type="file"]`);
 		g_btnSectAdd = document.getElementById("add-section-btn");
 		g_btnPrint = document.getElementById("print-btn");
-		g_layout = g_params.get("l");
-		g_theme = g_params.get("t");
 
 		document.addEventListener("focusin", (p_event) => {
 
