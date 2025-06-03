@@ -6,7 +6,7 @@
 	name="viewport"
 	content="width=device-width, initial-scale=1.0"
 />
-<title>Templates - Résum󠃩é Builder</title>
+<title>Home - Résum󠃩é Builder</title>
 
 <link
 	id="dark"
@@ -28,12 +28,13 @@
 		const styleLight = document.getElementById("light");
 		const styleDark = document.getElementById("dark");
 
-		const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 		let theme = localStorage.getItem("theme");
 
 		if (!theme) {
 
-			theme = prefersDark ? "dark" : "light";
+			theme = window.matchMedia("(prefers-color-scheme: light)").matches
+				? "light"
+				: "dark";
 
 		}
 
@@ -69,7 +70,12 @@
 </script>
 
 <style id="page-theme-btn-style">
+	#page-theme-btn.toggled {
+		border: 2px solid black;
+	}
+
 	#page-theme-btn {
+		border: 2px solid grey;
 		background-color: white;
 		border-radius: 50px;
 		margin-bottom: 0%;
@@ -79,8 +85,10 @@
 		width: 70px;
 	}
 
+	/* This is the circle inside: */
+
 	#page-theme-btn div {
-		transition: margin-left 0.2s ease-in, background-color 0.2s ease-in;
+		transition: border 0.2s ease-in, margin-left 0.2s ease-in, background-color 0.2s ease-in;
 		box-shadow: 0 0 10px black;
 		background-color: white;
 		border-radius: 100%;
@@ -90,16 +98,25 @@
 	}
 
 	#page-theme-btn.toggled div {
-		box-shadow: 0 0 10px white;
+		box-shadow: 0 0 10px grey;
 		background-color: black;
 		margin-left: 50%;
+	}
+
+	/* THIS is the parent!: */
+
+	@media (max-width: 768px) {
+		#theme-label {
+			margin-left: 40%;
+		}
 	}
 
 	#theme-label {
 		/* transform: translate(-50%, -50%); */
 		transition: color 0.2s ease-in;
+		line-height: 0.75rem;
 		margin-bottom: 0%;
-		margin-left: 45%;
+		margin-left: 47%;
 		margin-top: 0%;
 		color: white;
 	}
@@ -112,11 +129,15 @@
 <body>
 	<!-- The switch: -->
 	<p id="theme-label">
-		Theme: <button id="page-theme-btn">
+		<button id="page-theme-btn">
 			<div></div>
 		</button>
+		<br>
+		&nbsp;
+		&nbsp;
+		&nbsp;
+		Theme
 	</p>
-	<!-- The label below it: -->
 	<main class="choice-screen">
 		<!-- Layouts: -->
 		<section class="column layout-column">
@@ -297,7 +318,13 @@
 		const btnArrayTheme = [...document.querySelectorAll(".theme-btn")];
 		const btnArrayLayout = [...document.querySelectorAll(".layout-btn")];
 		const createUrl = () => `/resume.html?l=${g_choiceLayout}&&t=${g_choiceTheme}`;
-		const cbckAssignUrl = () => window.location.href = (g_choiceTheme && g_choiceLayout) ? createUrl() : "";
+		const cbckAssignUrl = () => {
+			if (g_choiceTheme && g_choiceLayout) {
+
+				window.location.href = createUrl();
+
+			}
+		};
 
 		switch (sessionStorage.getItem("last")) {
 

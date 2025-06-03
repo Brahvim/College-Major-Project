@@ -13,23 +13,21 @@ body {
 }
 
 #resume {
-	max-width: 900px;
-	margin: 0 auto;
-	background: white;
+	gap: 2rem;
 	padding: 2rem;
+	margin: 0 auto;
+	max-width: 900px;
+	background: white;
 	border-radius: 12px;
 	box-shadow: 0 4px 20px rgba(0, 64, 128, 0.1);
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
 }
 
 .section {
 	padding: 1.5rem;
-	border-left: 4px solid #3a75c4;
 	border-radius: 8px;
 	background: #f0f6ff;
 	transition: background 0.2s ease;
+	border-left: 4px solid #3a75c4;
 }
 
 .section:hover {
@@ -41,11 +39,11 @@ body {
 	width: 100%;
 	resize: none;
 	border: none;
-	background: transparent;
 	font: inherit;
 	color: inherit;
 	padding: 0.25rem;
 	box-sizing: border-box;
+	background: transparent;
 }
 
 .user-editable-h2:focus,
@@ -71,12 +69,12 @@ p {
 	border-radius: 6px;
 	font-weight: bold;
 	cursor: pointer;
-	color: white;
+	color: black;
 	float: right;
 	border: none;
 }
 
 .remove-section-btn:hover {
 	background: #b02020;
-	color: grey;
+	color: white;
 }

@@ -1,5 +1,5 @@
-<html lang="en">
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
 	<meta charset="UTF-8">
@@ -7,19 +7,51 @@
 		name="viewport"
 		content="width=device-width, initial-scale=1.0"
 	>
-	<title>Templates Résum󠃩é Builder</title>
+	<title>Editor - Résum󠃩é Builder</title>
 </head>
 
 <script>
+	/** @type HTMLElement */
+	let g_btnPrint;
+
+	/** @type HTMLElement */
+	let g_divResume;
+
+	/** @type HTMLElement */
+	let g_btnSectAdd;
+
+	/** @type HTMLElement */
+	let g_btnAddImage;
+
+	/** @type EventTarget */
+	let g_lastTextArea;
+
 	let g_layout = "", g_theme = "";
 	const reveal = () => document.body.style.display = "block";
 	const g_params = new URLSearchParams(new URL(window.location.href).search);
 
 	// Hi, *uhh*, we *correct* stuff!
 	function correct() {
+		// Mak 'em all resizable:
+		document.querySelectorAll("textarea").forEach(textareaMakeResizable);
+
 		// "YOU *SERIOUSLY WANT TO* MAKE ANOTHER API CALL TO LOAD YOUR SCRIPTS THAT *CORRECT STUFF?!*"
 		// ...Well, *that's why* there's less "modularity" here.
 		// Have fun with software principles, junior!
+
+		// This one's for the "+ Photo" button:
+		switch (g_theme) {
+
+			case "kernel-org":
+			case "github-dark": {
+
+				g_btnAddImage.parentElement.querySelector("br").remove();
+
+			} break;
+
+		}
+
+		const style = document.createElement("style");
 
 		switch (g_theme) {
 
@@ -29,12 +61,12 @@
 
 					case "top-bottom": {
 
-
-					}
-
-					case "card-sections": {
-
-
+						style.textContent = `
+						.section div h2 textarea {
+							width: 162% !important;
+							margin-left: 30% !important;
+						}
+						`;
 
 					} break;
 
@@ -46,14 +78,19 @@
 
 				switch (g_layout) {
 
-					case "top-bottom": {
-
-
-					}
-
 					case "card-sections": {
 
+						style.textContent = `
+						.section p textarea {
+							width: 90% !important;
+							margin-left: 2.5% !important;
+						}
 
+						.section h2 textarea {
+							width: 90% !important;
+							margin-left: 2.5% !important;
+						}
+						`;
 
 					} break;
 
@@ -62,6 +99,8 @@
 			} break;
 
 		}
+
+		document.body.insertAdjacentElement("afterbegin", style);
 	}
 
 	// Load the loadings!...:
@@ -78,28 +117,102 @@
 		css.href = `/theme/${g_theme}.css`; css.rel = "stylesheet"; document.body.appendChild(css);
 		document.body.appendChild(document.createElement("script")).textContent = await javascript.text();
 
+		g_divResume = document.getElementById("resume");
+
 		correct();
 		reveal();
 	}
 
+	/**
+	 * From [ https://stackoverflow.com/a/25621277 ]!
+	 * @param {HTMLTextAreaElement} p_textarea
+	 */
+	function textareaMakeResizable(p_textarea) {
+		p_textarea.style.height = "auto";
+		p_textarea.style.overflowY = "hidden";
+
+		const resize = () => {
+
+			console.log("Resized.");
+			p_textarea.style.height = "auto";
+			p_textarea.style.height = (p_textarea.scrollHeight - 1) + "px";
+
+		};
+
+		p_textarea.addEventListener("input", resize);
+		p_textarea.addEventListener("focusout", resize);
+		p_textarea.addEventListener("focusin", resize);
+	}
+
+	const textareaMakeAllResizable = () => [...document.getElementsByTagName("textarea")].forEach(textareaMakeResizable);
+
+	// At least on FF, printing screws resizing!:
+	// window.addEventListener("afterprint", () => {
+
+	// 	document.addEventListener("focusin", function () {
+
+	// 		textareaMakeAllResizable();
+	// 		document.removeEventListener(this);
+
+	// 	});
+
+	// });
+
 	document.addEventListener("DOMContentLoaded", () => {
 
-		const btnSectAdd = document.getElementById("add-section-btn");
-		const btnPrint = document.getElementById("print-btn");
-		const divResume = document.getElementById("resume");
-
-		g_theme = g_params.get("t");
-		g_layout = g_params.get("l");
 		document.body.style.display = "none"; // For instant display. No clunky loading!
 
-		btnSectAdd.addEventListener("click", () => {
+		g_btnAddImage = document.querySelector(`#add-image-btn input[type="file"]`);
+		g_btnSectAdd = document.getElementById("add-section-btn");
+		g_btnPrint = document.getElementById("print-btn");
+		g_layout = g_params.get("l");
+		g_theme = g_params.get("t");
 
-			// btnSectAdd.scrollIntoView({ behavior: "smooth" });
-			// const rect = btnSectAdd.getBoundingClientRect();
-			// window.scrollTo({ top: (8 * rect.height) + rect.bottom + window.pageYOffset, behavior: "smooth" });
+		document.addEventListener("focusin", (p_event) => {
 
-			// window.scrollTo({ top: window.innerHeight + window.pageYOffset + divResume.getBoundingClientRect().bottom, behavior: "smooth" });
-			window.scrollTo({ top: window.innerHeight + window.pageYOffset + divResume.getBoundingClientRect().bottom, behavior: "smooth" });
+			if (p_event.target.tagName === "TEXTAREA") {
+
+				g_lastTextArea = p_event.target;
+
+			}
+
+		});
+
+		g_btnAddImage.addEventListener("change", (p_event) => {
+
+			const active = g_lastTextArea;
+			const files = p_event.target.files;
+
+			if (active && active.tagName === "TEXTAREA") {
+
+				const start = active.selectionStart;
+				const before = active.value.substring(0, start);
+				const after = active.value.substring(active.selectionEnd);
+
+				let length = 0;
+				let value = before;
+
+				for (const f of files) {
+
+					const tag = `<img src="${URL.createObjectURL(f)}" alt=${f.name}>\n`;
+					length += tag.length;
+					value += tag;
+
+				}
+
+				active.value = value + after; // One single assignment.
+
+				// Moves cursor:
+				active.selectionStart = active.selectionEnd = start + length;
+				active.focus(); // DID IT GET UNFOCUSED?!
+
+			}
+
+		});
+
+		g_btnSectAdd.addEventListener("click", () => {
+
+			window.scrollTo({ top: window.innerHeight + window.pageYOffset + g_divResume.getBoundingClientRect().bottom, behavior: "smooth" });
 
 		});
 
@@ -111,21 +224,33 @@
 <body>
 	<div id="section-manager-container">
 		<a
-			class="control-btn"
-			id="home-button"
 			href="/"
+			id="home-btn"
+			class="control-btn"
 		><br>&lt;&mdash;</a>
 		<button
-			class="control-btn"
 			id="print-btn"
+			class="control-btn"
 		>Print</button>
+		<label
+			id="add-image-btn"
+			class="control-btn"
+		>
+			<input
+				multiple
+				type="file"
+				class="control-btn"
+			>
+			<br style="line-height: 1.05rem;">
+			<p>+Photo</p>
+			</input>
+		</label>
 		<button
 			class="control-btn"
 			id="add-section-btn"
-		>+</button>
+		>+Section</button>
 	</div>
 </body>
-
 
 <style>
 	@media print {
@@ -134,14 +259,29 @@
 			display: none !important;
 		}
 
+		textarea {
+			height: auto !important;
+			overflow: visible !important;
+		}
+
+	}
+
+	.user-editable-h2,
+	.user-editable-p {
+		resize: both !important;
+	}
+
+	input[type="file"] {
+		display: none;
+		/* opacity: 0; */
 	}
 
 	#section-manager-container {
 		columns: 2;
 		display: flex;
 		margin-top: 2rem;
+		text-align: center;
 		justify-content: center;
-		text-align: center center;
 	}
 
 	#section-manager-container button {
@@ -151,16 +291,16 @@
 	.control-btn {
 		width: 150px;
 		height: 50px;
-		border: none;
 		color: white;
 		cursor: pointer;
-		/* Clearly here for only `.home-button`: */
+		font-size: large;
 		line-height: 1rem;
 		text-align: center;
 		border-radius: 6px;
 		background: #5599ff;
 		text-decoration: none;
 		font-family: sans-serif;
+		border: 0px solid transparent;
 		transition: background 0.2s ease;
 	}
 
@@ -168,6 +308,19 @@
 		margin-left: 90%;
 		margin-right: 5%;
 		border-radius: 16px;
+	}
+
+	#add-image-btn {
+		margin-left: 2px;
+	}
+
+	#add-image-btn p {
+		top: 0%;
+		color: white;
+		font-size: large;
+		line-height: 1rem;
+		text-align: center;
+		font-family: sans-serif;
 	}
 
 	.control-btn:hover {

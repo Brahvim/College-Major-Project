@@ -1,7 +1,6 @@
 let g_sectCount = 0;
-const g_btnPrint = document.getElementById("print-btn");
 const g_templateSect = document.getElementById("section");
-const g_btnSectAdd = document.getElementById("add-section-btn");
+const g_containerSections = document.getElementById("col-50-sections");
 
 g_btnPrint.addEventListener("click", () => {
 
@@ -50,15 +49,15 @@ g_btnPrint.addEventListener("click", () => {
 
 g_btnSectAdd.addEventListener("click", () => {
 
-	const containerSections = document.getElementById("col-50-sections");
 	const newSection = document.createElement("div");
 
 	newSection.className = "section";
 	newSection.id = `extra-section-${g_sectCount}`;
 	newSection.appendChild(g_templateSect.content.cloneNode(true)); // Clones `content` node, not the `<template>` node itself!
+	newSection.querySelectorAll("textarea").forEach(textareaMakeResizable);
 
-	++g_sectCount;
-	containerSections.insertAdjacentElement("beforeend", newSection);
-	newSection.querySelector(".remove-section-btn").addEventListener("click", () => containerSections.removeChild(newSection));
+	g_sectCount++;
+	g_containerSections.insertAdjacentElement("beforeend", newSection);
+	newSection.querySelector(".remove-section-btn").addEventListener("click", () => g_containerSections.removeChild(newSection));
 
 });

@@ -13,10 +13,18 @@
 </template>
 
 <style>
+	@media print {
+
+		.remove-section-btn {
+			display: none;
+		}
+
+	}
+
 	.layout-tiles {
 		display: grid;
-		grid-template-rows: 50;
-		grid-template-columns: 50;
+		grid-template-rows: repeat(3, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 
 	.section {

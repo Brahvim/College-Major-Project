@@ -19,8 +19,6 @@ body {
 	border-radius: 16px;
 	padding: 2.5rem;
 	box-shadow: 0 0 25px #0ff, 0 0 40px #f0f, 0 0 8px #0ff inset;
-	display: flex;
-	flex-direction: column;
 	gap: 2.2rem;
 	backdrop-filter: blur(6px);
 }

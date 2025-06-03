@@ -2,23 +2,25 @@
 	id="resume"
 	class="layout-20-30-50"
 >
-	<div class="col col-20">
-		<h3><textarea class="user-editable-h2"># Brief Intro:</textarea></h3>
-		<p><textarea class="user-editable-p">Name + Image + Profession!</textarea></p>
-	</div>
+	<section class="col-20-30">
 
-	<div>
-		<div class="col col-30">
+		<div class="col-20">
+			<h3><textarea class="user-editable-h2"># Brief Intro:</textarea></h3>
+			<p><textarea class="user-editable-p">Name + Image + Profession!</textarea></p>
+		</div>
+
+		<div class="col-30">
 			<h3><textarea class="user-editable-h2"># Contact Info:</textarea></h3>
 			<p><textarea class="user-editable-p"></textarea></p>
 		</div>
 
-		<div
-			class="col-50"
-			id="col-50-sections"
-		>
-		</div>
-	</div>
+	</section>
+
+	<section
+		class="col-50"
+		id="col-50-sections"
+	>
+	</section>
 </div>
 
 <template
@@ -31,48 +33,49 @@
 </template>
 
 <style>
-	.layout-20-30-50 {
-		columns: 2;
-		gap: 1.5rem;
-		margin: auto;
-		display: flex;
-		padding: 2rem;
-		column-gap: 500px;
-		max-width: 1000px;
-		flex-direction: column;
+	@media print {
+
+		.remove-section-btn {
+			display: none;
+		}
+
 	}
 
-	.col {
+	.layout-20-30-50 {
+		flex-direction: row;
 		display: flex;
-		padding: 1rem;
-		border-radius: 8px;
-		background: #fdfdfd;
+		width: 100%;
+		gap: 1rem;
+	}
+
+	.col-20-30 {
+		gap: 1rem;
+		width: 40%;
+		display: flex;
+		max-height: 80vh;
 		flex-direction: column;
-		border: 1px dashed #bbb;
 	}
 
 	.col-20 {
-		width: 30%;
-		height: 20%;
+		height: 40%;
 	}
 
 	.col-30 {
-		width: 30%;
-		height: 80%;
+		height: 60%;
 	}
 
 	.col-50 {
-		/* gap: 1rem;
-		width: 100%; */
-		/* display: flex; */
+		gap: 1rem;
+		width: 60%;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.section {
-		width: 50%;
+		/* width: 50%; */
 		padding: 1rem;
-		margin-left: 45%;
-		border-radius: 8px;
 		position: relative;
+		border-radius: 8px;
 		background: #fefefe;
 		border: 1px dashed #aaa;
 	}
