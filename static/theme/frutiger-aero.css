@@ -53,9 +53,9 @@ body {
 	border-bottom: 1px dashed #77bbf4;
 }
 
-.user-editable-p {
+/* .user-editable-p {
 	border: 1px dashed #77bbf4;
-}
+} */
 
 .user-editable-h2:focus,
 .user-editable-p:focus {

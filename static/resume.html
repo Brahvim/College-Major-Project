@@ -11,6 +11,7 @@
 </head>
 
 <script>
+	//#region Globals.
 	/** @type HTMLElement[] */
 	const g_textareaScalingLayouts = [
 
@@ -20,7 +21,7 @@
 
 	];
 
-	/** @type Record<string, string> */
+	/** @type Record<string, number> */
 	const g_defaultSectCountPerLayout = {
 
 		"tiles": 2,
@@ -42,12 +43,13 @@
 	/** @type HTMLElement */
 	let g_btnAddImage;
 
-	/** @type EventTarget */
+	/** @type HTMLElement */
 	let g_lastTextArea;
 
 	const g_params = new URLSearchParams(new URL(window.location.href).search);
 	let g_layout = g_params.get("l"), g_theme = g_params.get("t");
 	const reveal = () => document.body.style.display = "block";
+	//#endregion
 
 	// Hi, *uhh*, we *correct* stuff!
 	function correct() {
@@ -78,6 +80,26 @@
 
 				switch (g_layout) {
 
+					case "20-30-50": {
+
+						style.textContent = `
+						@media print {
+
+							.layout-20-30-50 {
+								width: 10% !important;
+								margin-left: 0% !important;
+							}
+
+						}
+
+						.layout-20-30-50 {
+							width: 50% !important;
+							margin-left: 20% !important;
+						};
+						`;
+
+					} break;
+
 					case "top-bottom": {
 
 						style.textContent = `
@@ -97,11 +119,21 @@
 
 				switch (g_layout) {
 
-					case "": {
+					case "20-30-50": {
 
 						style.textContent = `
-						.section {
+						@media print {
+
+							.layout-20-30-50 {
+								width: 10% !important;
+								margin-left: 0% !important;
+							}
+
+						}
+
+						.layout-20-30-50 {
 							width: 50% !important;
+							margin-left: 20% !important;
 						};
 						`;
 
@@ -145,19 +177,9 @@
 		document.body.insertAdjacentHTML("beforeend", await html.text());
 		css.href = `/theme/${g_theme}.css`; css.rel = "stylesheet"; document.body.appendChild(css);
 		document.body.appendChild(document.createElement("script")).textContent = await javascript.text();
-
-		g_divResume = document.getElementById("resume");
-
-		for (let i = 0; i < g_defaultSectCountPerLayout[g_layout]; i++) {
-
-			g_btnSectAdd.click();
-
-		}
-
-		correct();
-		reveal();
 	}
 
+	//#region `<textarea>` resizability.
 	/**
 	 * From [ https://stackoverflow.com/a/25621277 ]!
 	 * @param {HTMLTextAreaElement} p_textarea
@@ -193,8 +215,9 @@
 		});
 
 	});
+	//#endregion
 
-	document.addEventListener("DOMContentLoaded", () => {
+	const loadBefore = () => {
 
 		document.body.style.display = "none"; // For instant display. No clunky loading!
 
@@ -212,52 +235,93 @@
 
 		});
 
+		const textareaAddImage = (p_blob) => {
+
+			const active = g_lastTextArea;
+
+			if (!active) {
+
+				return;
+
+			}
+
+			const start = active.selectionStart;
+			const tag = `<img src="${p_blob}">\n`;
+			const before = active.value.substring(0, start);
+			const after = active.value.substring(active.selectionEnd);
+
+			active.focus(); // DID IT GET UNFOCUSED?!
+			active.value = before + tag + after; // One single assignment.
+			active.selectionStart = active.selectionEnd = start + tag.length; // Moves cursor.
+
+		};
+
 		g_btnAddImage.addEventListener("change", (p_event) => {
 
 			const active = g_lastTextArea;
 			const files = p_event.target.files;
 
-			if (active && active.tagName === "TEXTAREA") {
+			if (!active) {
 
-				// console.log(active);
-
-				const start = active.selectionStart;
-				const before = active.value.substring(0, start);
-				const after = active.value.substring(active.selectionEnd);
-
-				let length = 0;
-				let value = before;
-
-				for (const f of files) {
-
-					const tag = `<img src="${URL.createObjectURL(f)}" alt=${f.name}>\n`;
-					length += tag.length;
-					value += tag;
-
-				}
-
-				active.value = value + after; // One single assignment.
-
-				// Moves cursor:
-				active.selectionStart = active.selectionEnd = start + length;
-				active.focus(); // DID IT GET UNFOCUSED?!
+				return;
 
 			}
 
+			const start = active.selectionStart;
+			const before = active.value.substring(0, start);
+			const after = active.value.substring(active.selectionEnd);
+
+			let length = 0;
+			let value = before;
+
+			for (const f of files) {
+
+				const tag = `<img src="${URL.createObjectURL(f)}">\n`;
+				length += tag.length;
+				value += tag;
+
+			}
+
+			active.value = value + after; // One single assignment.
+
+			// Moves cursor:
+			active.selectionStart = active.selectionEnd = start + length;
+			active.focus(); // DID IT GET UNFOCUSED?!
+
 		});
+
+		load().then(loadAfter);
+
+	};
+
+	const loadAfter = () => {
+
+		g_divResume = document.getElementById("resume");
+
+		for (let i = 0; i < g_defaultSectCountPerLayout[g_layout]; ++i) {
+
+			g_btnSectAdd.click();
+
+		}
 
 		g_btnSectAdd.addEventListener("click", () => {
 
-			window.scrollTo({ top: window.innerHeight + window.pageYOffset + g_divResume.getBoundingClientRect().bottom, behavior: "smooth" });
+			window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
 
 		});
 
-		load();
+		correct();
+		reveal();
 
-	});
+	};
+
+	document.addEventListener("DOMContentLoaded", loadBefore);
 </script>
 
 <body>
+	<div id="photo-manager-container">
+	</div>
+
 	<div id="section-manager-container">
 		<a
 			href="/"
@@ -286,11 +350,14 @@
 			id="add-section-btn"
 		>+Section</button>
 	</div>
+	<br>
+	<br>
 </body>
 
 <style>
 	@media print {
 
+		#photo-manager-container,
 		#section-manager-container {
 			display: none !important;
 		}
@@ -312,13 +379,28 @@
 		/* opacity: 0; */
 	}
 
-	#section-manager-container {
+	#photo-manager-container {
+		gap: 5px;
 		z-index: 1;
 		display: flex;
 		position: fixed;
-		margin-left: 50%;
+		margin-top: 15%;
+		margin-left: 5%;
 		text-align: center;
-		flex-direction: row;
+		flex-direction: column;
+		justify-content: center;
+		background-color: white;
+	}
+
+	#section-manager-container {
+		gap: 5px;
+		z-index: 1;
+		display: flex;
+		position: fixed;
+		margin-top: 15%;
+		margin-left: 90%;
+		text-align: center;
+		flex-direction: column;
 		justify-content: center;
 		transform: translate(-50%, -50%);
 	}
@@ -343,6 +425,10 @@
 		transition: background 0.2s ease;
 	}
 
+	.control-btn:hover {
+		background: #407ddf;
+	}
+
 	.remove-section-btn {
 		margin-left: 90%;
 		margin-right: 5%;
@@ -360,10 +446,6 @@
 		line-height: 1rem;
 		text-align: center;
 		font-family: sans-serif;
-	}
-
-	.control-btn:hover {
-		background: #407ddf;
 	}
 </style>
 
